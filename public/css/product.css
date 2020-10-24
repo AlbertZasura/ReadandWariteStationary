@@ -1,0 +1,39 @@
+.box__container {
+    width: 60%;
+    margin: 40px auto;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.box {
+    background-color: #fff;
+    margin: 15px;
+    width: 250px;
+    height: auto;
+}
+
+.product_img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product_img img {
+    width: 250px;
+    height: 250px;
+}
+
+.product_idn {
+    padding: 10px 20px;
+}
+
+.product_name {
+    color: #0275d8;
+    margin: 10px auto;
+}
+
+.product_desc {
+    margin: 10px auto;
+}
