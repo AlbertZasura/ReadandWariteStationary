@@ -1,0 +1,35 @@
+.form__line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.form__line p {
+    display: block;
+    margin-right: 15px;
+}
+
+.form__line input {
+    width: 300px;
+    height: 25px;
+    margin-left: 15px;
+    border-color: rgba(0, 0, 0, 0.2);
+    outline: none;
+    padding: 0 10px;
+}
+
+.form__login .btn__login {
+    margin: 20px 0px;
+    text-align: center;
+}
+
+.btn__login button {
+    padding: 12px 15px;
+    border: none;
+    border-radius: 5px;
+    background: #0275d8;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
