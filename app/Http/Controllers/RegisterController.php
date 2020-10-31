@@ -7,14 +7,22 @@ use App\User;
 
 class RegisterController extends Controller
 {
-    public function register() {
+    public function create() {
         return view('pages.register');
     }
 
     public function store(){
-        User::create(request(['name','email','password']));
+        $this->validate(request(),[
+            'name' => 'required|min:5',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|confirmed|alpha_num|min:6'
+        ]);
 
-        return redirect('/');
+        $user = User::create(request(['name','email','password']));
+
+        auth()->login($user);
+
+        return redirect()->home();
     }
 
 }

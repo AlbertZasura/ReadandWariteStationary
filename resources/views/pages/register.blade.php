@@ -7,7 +7,7 @@
 @section('title', 'Register')
 
 @section('content_form')
-    <form action="/" method="POST">
+    <form action="/register" method="POST">
         {{ csrf_field() }}
         <div class="form__line">
             <label for="name">Name</label>
@@ -25,12 +25,16 @@
         </div>
 
         <div class="form__line">
-            <label for="confirmPassword">Confirm Password</label>
-            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
+            <label for="password_confirmation">Confirm Password</label>
+            <input type="password" class="form-control" id="password_confirmation" name="password_confirmation">
         </div>
 
         <div class="btn__login">
             <button type="submit" class="btn btn-primary">Register</button>
         </div>
+
+        @include('layouts.errors')
     </form>
+
+
 @endsection
