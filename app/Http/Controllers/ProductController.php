@@ -45,12 +45,10 @@ class ProductController extends Controller
             'image' => 'required|file|image|mimes:jpeg,png,jpg'
         ]);
 
-        $file = $request->file('image');
-        $nama_file = $file->getClientOriginalName();
- 
-      	// isi dengan nama folder tempat kemana file diupload
-		$tujuan_upload = 'data_file';
-        $file->move($tujuan_upload,$nama_file);
+        $image = $request->image;
+        if($image){
+            $image->move('asset',$image->getClientOriginalName());
+        }
         
         Product::create([
             'name' => $request->name,
@@ -58,10 +56,10 @@ class ProductController extends Controller
             'stock' => $request->stock,
             'price' => $request->price,
             'description' => $request->description,
-            'image' =>  $nama_file
+            'image' =>  $image->getClientOriginalName()
         ]);
 
-        return redirect()->home();
+        return redirect('/product/add');
     }
 
     /**

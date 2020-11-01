@@ -2,14 +2,13 @@
 
 @section('asset__css')
     <link rel="stylesheet" href="/css/bootstrap.min.css">
-    @yield('asset')
+    <script src="{{ URL::asset('script/jquery-3.5.1.min.js') }}"></script>
 @endsection
 
 @section('nav_right_content')
     <p><a href="/login">Login</a></p>
     <p><a href="/register">Register</a></p>
 @endsection
-
 
 @section('container__content')
     <div class="container mt-4 ">
@@ -19,18 +18,19 @@
 
             <div class="file-field">
                 <div class="mb-3">
-                    {{-- <img src="{{ url('/data_file//'.$product->image) }}" alt="image"> --}}
+                    <img id="imgProduct" src="">
                 </div>
                 <div class="justify-content-left">
                     <div class="btn btn-mdb-color btn-rounded float-left">
                         <span>Browse photos</span>
-                        <input type="file" name="image" id="image">
+                        <input type="file" name="image" id="image" onchange="loadPreview(this);">
                     </div>
                 </div>
             </div>
 
             <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="basic-addon1" id="name" name="name" required>
+                <input type="text" class="form-control" placeholder="Name" aria-label="Name" aria-describedby="basic-addon1"
+                    id="name" name="name" required>
             </div>
 
             <div class="input-group mb-3">
@@ -65,3 +65,4 @@
         </form>
     </div>
 @endsection
+<script src="{{ URL::asset('script/add.js') }}"></script>
