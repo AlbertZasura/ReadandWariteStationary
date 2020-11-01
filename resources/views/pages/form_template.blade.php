@@ -1,8 +1,8 @@
 @extends('pages.template')
 
 @section('asset__css')
-  <link rel="stylesheet" href="/css/form.css">
-  @yield('asset')
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    @yield('asset')
 @endsection
 
 @section('nav_right_content')
@@ -11,10 +11,16 @@
 @endsection
 
 @section('container__content')
-    <div class="container__login">
-      <p class="title__login">@yield('title')</p>
-      <div class="form__content">
-        @yield('content_form')
-      </div>
+    <div class="container mt-4">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">@yield('title')</div>
+                    <div class="card-body">
+                        @yield('content_form')
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 @endsection
