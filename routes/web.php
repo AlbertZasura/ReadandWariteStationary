@@ -20,3 +20,7 @@ Route::post('/product/add', 'ProductController@store');
 // Route::get('/admin' , function() {
 //   return view('pages.admin');
 // });
+
+Route::get('/home' , function() {
+  return view('pages.template');
+});

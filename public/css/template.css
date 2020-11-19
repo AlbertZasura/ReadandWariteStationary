@@ -1,17 +1,17 @@
-* {
+/* * {
     margin: 0;
     padding: 0;
-}
+} */
 
 body {
-    font-family: sans-serif;
+    /* font-family: sans-serif; */
     background: url("../img/bg.jpg");
     height: 100vh;
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover; 
 }
-
+/* 
 .nav__bar {
     position: sticky;
     top: 0;
@@ -85,4 +85,4 @@ body {
 .nav__right p span {
     color: black;
     float: right;
-}
+} */

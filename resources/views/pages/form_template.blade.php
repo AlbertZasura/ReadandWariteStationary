@@ -1,7 +1,6 @@
 @extends('pages.template')
 
 @section('asset__css')
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
     @yield('asset')
 @endsection
 
