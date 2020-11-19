@@ -1,13 +1,7 @@
 @extends('pages.template')
 
 @section('asset__css')
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
     <script src="{{ URL::asset('script/jquery-3.5.1.min.js') }}"></script>
-@endsection
-
-@section('nav_right_content')
-    <p><a href="/login">Login</a></p>
-    <p><a href="/register">Register</a></p>
 @endsection
 
 @section('container__content')

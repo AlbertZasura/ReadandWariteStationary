@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Product;
+use App\ProductType;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class ProductTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('pages.home');
+        //
     }
 
     /**
@@ -24,8 +24,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-	    $product = Product::get();
-	    return view('stationaries.add',['product' => $product]);
+	    $productType = ProductType::get();
+	    return view('stationaryTypes.add',['productType' => $productType]);
     }
 
     /**
@@ -37,11 +37,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'name' => 'required|min:5|unique:products,name',
-            'type' => 'required',
-            'stock' => 'required|integer|min:0',
-            'price' => 'required|integer|min:5000',
-            'description' => 'required|min:10',
+            'name' => 'required|unique:product_types,name',
             'image' => 'required|file|image|mimes:jpeg,png,jpg'
         ]);
 
@@ -50,16 +46,12 @@ class ProductController extends Controller
             $image->move('asset',$image->getClientOriginalName());
         }
         
-        Product::create([
+        ProductType::create([
             'name' => $request->name,
-            'type' => $request->type,
-            'stock' => $request->stock,
-            'price' => $request->price,
-            'description' => $request->description,
             'image' =>  $image->getClientOriginalName()
         ]);
 
-        return redirect('/product/add');
+        return redirect('/productType/add');
     }
 
     /**
@@ -81,8 +73,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        $product = Product::get();
-	    return view('stationaries.update',['product' => $product]);
+        //
     }
 
     /**
@@ -94,21 +85,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        $this->validate($request, [
-            'name' => 'required|min:5|unique:products,name',
-            'stock' => 'required|integer|min:0',
-            'price' => 'required|integer|min:5000',
-            'description' => 'required|min:10',
-        ]);
-
-        Product::create([
-            'name' => $request->name,
-            'stock' => $request->stock,
-            'price' => $request->price,
-            'description' => $request->description,
-        ]);
-
-        return redirect('/product/update');
+        //
     }
 
     /**
