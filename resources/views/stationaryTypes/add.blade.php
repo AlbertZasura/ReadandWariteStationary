@@ -1,38 +1,32 @@
 @extends('pages.template')
-
-@section('asset__css')
-    <script src="{{ URL::asset('script/jquery-3.5.1.min.js') }}"></script>
-@endsection
-
-@section('title', 'Add Product Type')
-
+@section('title', 'Add Stationary Type')
 
 @section('container__content')
 
-    <div class="container mt-4 row">
+    <div class="row">
         <div class="col-md-4">
             <table class="table table-bordered text-center ">
                 <thead>
-                  <tr>
-                    <th class="border border-primary" scope="col">Number</th>
-                    <th class="border border-primary" scope="col">Stationary Type Name</th>
-                  </tr>
+                    <tr>
+                        <th class="border border-primary" scope="col">Number</th>
+                        <th class="border border-primary" scope="col">Stationary Type Name</th>
+                    </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td class="border border-primary">1</td>
-                    <td class="border border-primary">pen</td>
-                  </tr>
-                  <tr>
-                    <td>2</td>
-                    <td>smart reader</td>
-                  </tr>
-                  <tr>
-                    <td>3</td>
-                    <td>dictionary</td>
-                  </tr>
+                    <tr>
+                        <td class="border border-primary">1</td>
+                        <td class="border border-primary">pen</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>smart reader</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>dictionary</td>
+                    </tr>
                 </tbody>
-              </table>
+            </table>
         </div>
         <div class="col-md-8">
             @include('layouts.errors')

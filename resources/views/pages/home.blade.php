@@ -5,8 +5,8 @@
 @section('container__content')
     <a href="{{ url('/product/add') }}" class="btn btn-primary" role="button">Add New Stationary</a>
     <a href="{{ url('/productType/add') }}" class="btn btn-primary" role="button">Add New Stationary Type</a>
-    <a href="#" class="btn btn-primary" role="button">Edit Stationary Type</a>
-
+    <a href="{{ url('/productType/update') }}" class="btn btn-primary" role="button">Edit Stationary Type</a>
+  
     <div class="card-deck mt-4">
         <div class="card">
             <a href="#"><img class="card-img-top" src="..." alt="Card image cap"></a>

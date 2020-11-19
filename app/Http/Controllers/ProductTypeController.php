@@ -71,9 +71,10 @@ class ProductTypeController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit()
     {
-        //
+        $productType = ProductType::get();
+	    return view('stationaryTypes.update',['productType' => $productType]);
     }
 
     /**
@@ -85,7 +86,16 @@ class ProductTypeController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required|unique:product_types,name',
+        ]);
+
+       
+        ProductType::create([
+            'name' => $request->name,
+        ]);
+
+        return redirect('/productType/update');
     }
 
     /**
