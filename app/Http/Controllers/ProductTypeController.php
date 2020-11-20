@@ -24,8 +24,8 @@ class ProductTypeController extends Controller
      */
     public function create()
     {
-	    $productType = ProductType::get();
-	    return view('stationaryTypes.add',['productType' => $productType]);
+	    $productTypes = ProductType::get();
+	    return view('stationaryTypes.add',['productTypes' => $productTypes]);
     }
 
     /**
@@ -73,8 +73,8 @@ class ProductTypeController extends Controller
      */
     public function edit()
     {
-        $productType = ProductType::get();
-	    return view('stationaryTypes.update',['productType' => $productType]);
+        $productTypes = ProductType::get();
+	    return view('stationaryTypes.update',['productTypes' => $productTypes]);
     }
 
     /**

@@ -14,7 +14,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('pages.home');
+        $products = Product::paginate(6);
+        return view('pages.home',['products' => $products]);
     }
 
     /**
@@ -24,8 +25,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-	    $product = Product::get();
-	    return view('stationaries.add',['product' => $product]);
+	    $products = Product::get();
+	    return view('stationaries.add',['products' => $products]);
     }
 
     /**
@@ -81,8 +82,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        $product = Product::get();
-	    return view('stationaries.update',['product' => $product]);
+        $products = Product::get();
+	    return view('stationaries.update',['product' => $products]);
     }
 
     /**

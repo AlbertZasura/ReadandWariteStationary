@@ -13,18 +13,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="border border-primary">1</td>
-                        <td class="border border-primary">pen</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>smart reader</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>dictionary</td>
-                    </tr>
+                    @for ($i = 0; $i < count($productTypes); $i++)
+                        <tr>
+                            <td class="border border-primary">{{$i+1}}</td>
+                            <td class="border border-primary">{{$productTypes[$i]->name}}</td>
+                        </tr>
+                    @endfor
+
                 </tbody>
             </table>
         </div>
