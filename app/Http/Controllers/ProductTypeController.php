@@ -89,7 +89,6 @@ class ProductTypeController extends Controller
         $this->validate($request, [
             'name' => 'required|unique:product_types,name',
         ]);
-
         $productType = ProductType::find($id);
         $productType->name = $request->name;
         $productType->save();

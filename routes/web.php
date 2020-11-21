@@ -15,6 +15,7 @@ Route::get('/home' , 'ProductController@index');
 
 Route::get('/product/add', 'ProductController@create');
 Route::post('/product/add', 'ProductController@store');
+Route::get('/product/{product}', 'ProductController@show');
 Route::get('/product/{product}/edit', 'ProductController@edit');
 Route::patch('/product/{product}/edit', 'ProductController@update');
 Route::delete('/product/{product}/delete', 'ProductController@destroy');

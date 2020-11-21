@@ -4,7 +4,7 @@
 @section('container__content')
 
     @include('layouts.errors')
-    <form action="/product/{product}/edit" method="POST">
+    <form action="/product/{{$product->id}}/edit" method="POST">
         @method('patch')
         @csrf
         <div class="input-group mb-3">
@@ -30,5 +30,4 @@
         <button type="submit" class="btn btn-primary">Update Stationary Data</button>
 
     </form>
-    @include('layouts.errors')
 @endsection

@@ -30,13 +30,12 @@
 
         <div class="input-group mb-3">
             <div class="input-group-prepend">
-                <label class="input-group-text" for="type">Type</label>
+                <label class="input-group-text" for="type_id">Type</label>
             </div>
-            <select class="custom-select" id="type" name="type" required>
-                <option selected>Choose...</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+            <select class="custom-select" id="type" name="type_id" required>
+                @foreach ($productTypes as $productType)
+                    <option value="{{ $productType->id }}">{{ $productType->name }}</option>
+                @endforeach
             </select>
         </div>
 
