@@ -1,4 +1,4 @@
-@extends('pages.template')
+@extends('layouts.master')
 
 @section('asset__css')
     @yield('asset')

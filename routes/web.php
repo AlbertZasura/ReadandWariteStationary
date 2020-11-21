@@ -13,17 +13,17 @@ Route::post('/register', 'RegisterController@store');
 
 Route::get('/home' , 'ProductController@index');
 
-Route::get('/product/update', 'ProductController@edit');
-Route::post('/product/update', 'ProductController@update');
-
 Route::get('/product/add', 'ProductController@create');
 Route::post('/product/add', 'ProductController@store');
+Route::get('/product/{product}/edit', 'ProductController@edit');
+Route::patch('/product/{product}/edit', 'ProductController@update');
+Route::delete('/product/{product}/delete', 'ProductController@destroy');
 
 Route::get('/productType/add', 'ProductTypeController@create');
 Route::post('/productType/add', 'ProductTypeController@store');
-
-Route::get('/productType/update', 'ProductTypeController@edit');
-Route::post('/productType/update', 'ProductTypeController@update');
+Route::get('/productType/edit', 'ProductTypeController@edit');
+Route::patch('/productType/{productType}/update', 'ProductTypeController@update');
+Route::delete('/productType/{productType}/delete', 'ProductTypeController@destroy');
 // Route::get('/member' , function() {
 //   return view('pages.member');
 // });

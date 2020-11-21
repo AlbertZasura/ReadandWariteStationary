@@ -1,11 +1,11 @@
-@extends('pages.template')
+@extends('layouts.master')
 
 @section('title', 'home')
 
 @section('container__content')
     <a href="{{ url('/product/add') }}" class="btn btn-primary" role="button">Add New Stationary</a>
     <a href="{{ url('/productType/add') }}" class="btn btn-primary" role="button">Add New Stationary Type</a>
-    <a href="{{ url('/productType/update') }}" class="btn btn-primary" role="button">Edit Stationary Type</a>
+    <a href="{{ url('/productType/edit') }}" class="btn btn-primary" role="button">Edit Stationary Type</a>
 
     <div class="card-deck mt-4 row">
 

@@ -1,4 +1,4 @@
-@extends('pages.template')
+@extends('layouts.master')
 @section('title', 'Add Product')
 
 @section('container__content')

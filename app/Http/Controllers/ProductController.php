@@ -80,10 +80,10 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
-        $products = Product::get();
-	    return view('stationaries.update',['product' => $products]);
+        $product = Product::find($id);
+	    return view('stationaries.update',['product' => $product]);
     }
 
     /**
@@ -109,7 +109,7 @@ class ProductController extends Controller
             'description' => $request->description,
         ]);
 
-        return redirect('/product/update');
+        return redirect('/product/{product}/edit');
     }
 
     /**
@@ -118,8 +118,9 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        Product::destroy($id);
+        return redirect('/product/{product}/edit');
     }
 }
