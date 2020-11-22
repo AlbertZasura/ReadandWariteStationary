@@ -29,8 +29,8 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <form class="form-inline w-100 my-2 my-lg-2">
-                    <input class="form-control w-75 mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                <form action="/home" method="get" class="form-inline w-100 my-2 my-lg-2">
+                    <input class="form-control w-75 mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
                     <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
                 </form>
                 <ul class="navbar-nav mr-auto">
