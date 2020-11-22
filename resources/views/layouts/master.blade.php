@@ -34,7 +34,7 @@
                     <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
                 </form>
                 <ul class="navbar-nav mr-auto">
-                    {{-- <li class="nav-item dropdown">
+                    <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Dropdown
@@ -43,14 +43,20 @@
                             <a class="dropdown-item" href="#">Action</a>
                             <a class="dropdown-item" href="#">Another action</a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            <a class="dropdown-item" href="#">Logout</a>
                         </div>
-                    </li> --}}
-                    <li class="nav-item">
+                    </li>
+                    {{-- <li class="nav-item">
                         <a class="nav-link" href="/login">Login</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/register">Register</a>
+                    </li> --}}
+                    <li class="nav-item">
+                        <a class="btn btn-primary my-2 my-sm-0 mr-sm-2" href="/cart">Cart</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="btn btn-primary my-2 my-sm-0" href="/transaction">History</a>
                     </li>
                 </ul>
             </div>

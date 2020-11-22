@@ -23,7 +23,7 @@ class CreateProductsTable extends Migration
             $table->string('image');
             $table->timestamps();
             $table->timestamp('deleted_at')->nullable();
-            $table->foreign('type_id')->references('id')->on('product_types');
+            $table->foreign('type_id')->references('id')->on('product_types')->onDelete('cascade');;
         });
     }
 

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'WelcomeController@getIndex')->name('home');
 
 Route::get('/login' , 'SessionController@create');
+Route::get('/asdf' , 'SessionController@store');
 // Route::get('/logout' , 'SessionController@destroy');
 
 Route::get('/register' , 'RegisterController@create');
@@ -25,6 +26,8 @@ Route::post('/productType/add', 'ProductTypeController@store');
 Route::get('/productType/edit', 'ProductTypeController@edit');
 Route::patch('/productType/{productType}/update', 'ProductTypeController@update');
 Route::delete('/productType/{productType}/delete', 'ProductTypeController@destroy');
+
+Route::get('/transaction', 'TransactionController@index');
 // Route::get('/member' , function() {
 //   return view('pages.member');
 // });

@@ -38,7 +38,7 @@ class ProductSeeder extends Seeder
         for ($i=0; $i < 7; $i++) { 
             for ($j=0; $j <2 ; $j++) { 
                 $product = new Product;
-                $product->fill(["name" => $productNames[$index],"type_id" => $i+1,"stock" => 100,"price" => rand(5001,100001),"description" => "Lorem test","image" => $productPhotos[$index]]);
+                $product->fill(["name" => $productNames[$index],"type_id" => $i+1,"stock" => 100,"price" => rand(5001,50001),"description" => "Lorem test","image" => $productPhotos[$index]]);
                 $product->save();
                 $index=$index+1;
             }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 
 class SessionController extends Controller
 {
@@ -12,15 +14,14 @@ class SessionController extends Controller
 
     public function store(){
         $this->validate(request(),[
-            'name' => 'required|min:5',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|confirmed|alpha_num|min:6'
+            'email' => 'required|email',
+            'password' => 'required|alpha_num|min:6'
         ]);
 
-        $user = User::create(request(['name','email','password']));
-
-        auth()->login($user);
-
+        $user = User::where('email',request()->email)->first();
+        Auth::login($user);
+            // dd(Auth::check());
+            
         return redirect()->home();
     }
 
