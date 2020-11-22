@@ -60,7 +60,7 @@
                         </li>
                         @foreach ($users as $usr)
                             @if ($usr->name == 'member')
-                                <a href="{{ url('/cart') }}" class="btn btn-primary my-2 mx-1 my-sm-0" type="submit">Cart</a>
+                                <a href="/cart/{{ $usr->id }}" class="btn btn-primary my-2 mx-1 my-sm-0" type="submit">Cart</a>
                                 <a href="{{ url('/') }}" class="btn btn-primary my-2 mx-1 my-sm-0" type="submit">History</a>
                             @endif
                         @endforeach

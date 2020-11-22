@@ -31,6 +31,7 @@ Route::delete('/productType/{productType}/delete', 'ProductTypeController@destro
 Route::get('/transaction', 'TransactionController@index');
 
 Route::get('/cart', 'CartController@create');
+Route::get('/cart/{userId}', 'CartController@show');
 // Route::get('/member' , function() {
 //   return view('pages.member');
 // });
