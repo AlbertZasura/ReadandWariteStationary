@@ -3,16 +3,16 @@
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', 'WelcomeController@getIndex')->name('home');
+Route::get('/', 'WelcomeController@getIndex');
 
-Route::get('/login' , 'SessionController@create');
-Route::get('/asdf' , 'SessionController@store');
-// Route::get('/logout' , 'SessionController@destroy');
+Route::get('/login', 'SessionController@create');
+Route::get('/asdf', 'SessionController@store');
+Route::get('/logout', 'SessionController@destroy');
 
-Route::get('/register' , 'RegisterController@create');
+Route::get('/register', 'RegisterController@create');
 Route::post('/register', 'RegisterController@store');
 
-Route::get('/home' , 'ProductController@index');
+Route::get('/home', 'ProductController@index')->name('home');
 
 Route::get('/product/add', 'ProductController@create');
 Route::post('/product/add', 'ProductController@store');

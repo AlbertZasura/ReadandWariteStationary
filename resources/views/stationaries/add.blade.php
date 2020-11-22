@@ -40,12 +40,12 @@
         </div>
 
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Stock" aria-label="Stock" aria-describedby="basic-addon1"
+            <input type="number" class="form-control" placeholder="Stock" aria-label="Stock" aria-describedby="basic-addon1"
                 id="stock" name="stock" required>
         </div>
 
         <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Price" aria-label="Price" aria-describedby="basic-addon1"
+            <input type="number" class="form-control" placeholder="Price" aria-label="Price" aria-describedby="basic-addon1"
                 id="price" name="price" required>
         </div>
 

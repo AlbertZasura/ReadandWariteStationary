@@ -28,7 +28,7 @@
                             <form action="/productType/update" method="POST">
                                 @method('patch')
                                 @csrf
-                                <input type="text" class="form-control mr-sm-2" placeholder="Input Quantity"
+                                <input type="number" class="form-control mr-sm-2" placeholder="Input Quantity"
                                     aria-label="qty" aria-describedby="basic-addon1" id="qty" name="qty">
                                 
                                     <button type="submit" class="btn btn-dark my-2 my-sm-0 mr-sm-2">Add to Cart</button>
