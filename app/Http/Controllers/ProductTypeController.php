@@ -84,18 +84,15 @@ class ProductTypeController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
         $this->validate($request, [
             'name' => 'required|unique:product_types,name',
         ]);
-
-       
-        ProductType::create([
-            'name' => $request->name,
-        ]);
-
-        return redirect('/productType/update');
+        $productType = ProductType::find($id);
+        $productType->name = $request->name;
+        $productType->save();
+        return redirect('/productType/edit');
     }
 
     /**
@@ -104,8 +101,9 @@ class ProductTypeController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        ProductType::destroy($id);
+        return redirect('/productType/edit');
     }
 }

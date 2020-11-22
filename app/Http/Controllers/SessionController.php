@@ -3,31 +3,40 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+<<<<<<< HEAD
 use Validator;
 use Auth;
 use Session;
 use App\User;
+=======
+use App\User;
+use Illuminate\Support\Facades\Auth;
+>>>>>>> 3ede0f8d41dd20509ff958acd218b25bf7f25ad3
 
 class SessionController extends Controller
 {
-    public function create() {
+    public function create()
+    {
+        if (Auth::check() == true) {
+            return redirect()->home();
+        }
         return view('pages.login');
     }
 
-    public function store(){
-        $this->validate(request(),[
-            'name' => 'required|min:5',
-            'email' => 'required|email|unique:users,email',
-            'password' => 'required|confirmed|alpha_num|min:6'
+    public function store()
+    {
+        $this->validate(request(), [
+            'email' => 'required|email',
+            'password' => 'required|alpha_num|min:6'
         ]);
 
-        $user = User::create(request(['name','email','password']));
-
-        auth()->login($user);
+        $user = User::where('email', request()->email)->first();
+        Auth::login($user);
 
         return redirect()->home();
     }
 
+<<<<<<< HEAD
     public function destroy(){
         auth()->logout();
         Session::forget('users');
@@ -59,3 +68,11 @@ class SessionController extends Controller
         return view('pages.home');
     }
 }
+=======
+    public function destroy()
+    {
+        Auth::logout();
+        return redirect()->home();
+    }
+}
+>>>>>>> 3ede0f8d41dd20509ff958acd218b25bf7f25ad3

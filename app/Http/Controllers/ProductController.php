@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Product;
+use App\ProductType;
 use Illuminate\Http\Request;
 use Session;
 
@@ -13,12 +14,18 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+<<<<<<< HEAD
         $products = Product::paginate(6);
         $users = Session::get('users');
         if($users == null)  return view('pages.home',['products' => $products]);
         else return view('pages.home',['products' => $products, 'users' => $users]);
+=======
+        $search = $request->get('search');
+        $products = Product::where("name",'like','%'.$search.'%')->paginate(6);
+        return view('pages.home',['products' => $products]);
+>>>>>>> 3ede0f8d41dd20509ff958acd218b25bf7f25ad3
     }
 
     /**
@@ -28,8 +35,9 @@ class ProductController extends Controller
      */
     public function create()
     {
+        $productTypes = ProductType::all();
 	    $products = Product::get();
-	    return view('stationaries.add',['products' => $products]);
+	    return view('stationaries.add',['products' => $products,'productTypes' => $productTypes]);
     }
 
     /**
@@ -42,7 +50,7 @@ class ProductController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|min:5|unique:products,name',
-            'type' => 'required',
+            'type_id' => 'required',
             'stock' => 'required|integer|min:0',
             'price' => 'required|integer|min:5000',
             'description' => 'required|min:10',
@@ -56,11 +64,11 @@ class ProductController extends Controller
         
         Product::create([
             'name' => $request->name,
-            'type' => $request->type,
+            'type_id' => $request->type_id,
             'stock' => $request->stock,
             'price' => $request->price,
             'description' => $request->description,
-            'image' =>  $image->getClientOriginalName()
+            'image' =>  "asset/".$image->getClientOriginalName()
         ]);
 
         return redirect('/product/add');
@@ -72,9 +80,10 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $product)
+    public function show($id)
     {
-        //
+        $product = Product::find($id);
+        return view('stationaries.view',['product' => $product]);
     }
 
     /**
@@ -83,10 +92,11 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product)
+    public function edit($id)
     {
-        $products = Product::get();
-	    return view('stationaries.update',['product' => $products]);
+        
+        $product = Product::find($id);
+	    return view('stationaries.update',['product' => $product]);
     }
 
     /**
@@ -96,7 +106,7 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product)
+    public function update(Request $request, $id)
     {
         $this->validate($request, [
             'name' => 'required|min:5|unique:products,name',
@@ -104,15 +114,14 @@ class ProductController extends Controller
             'price' => 'required|integer|min:5000',
             'description' => 'required|min:10',
         ]);
+        $product = Product::find($id);
+        $product->name = $request->name;
+        $product->stock = $request->stock;
+        $product->price = $request->price;
+        $product->description = $request->description;
+        $product->save();
 
-        Product::create([
-            'name' => $request->name,
-            'stock' => $request->stock,
-            'price' => $request->price,
-            'description' => $request->description,
-        ]);
-
-        return redirect('/product/update');
+        return redirect("/product/".$id."/edit");
     }
 
     /**
@@ -121,8 +130,9 @@ class ProductController extends Controller
      * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $product)
+    public function destroy($id)
     {
-        //
+        Product::destroy($id);
+        return redirect("/home");
     }
 }

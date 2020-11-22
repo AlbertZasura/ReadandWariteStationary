@@ -1,4 +1,4 @@
-@extends('pages.template')
+@extends('layouts.master')
 @section('title', 'Update Product Type')
 
 @section('container__content')
@@ -18,14 +18,22 @@
                             <td class="border border-primary">{{ $i + 1 }}</td>
                             <td class="border border-primary">{{ $productTypes[$i]->name }}</td>
                             <td class="border border-primary">
-                                <form action="/productType/update" method="POST" enctype="multipart/form-data"
-                                    class="form-inline my-2">
-                                    {{ csrf_field() }}
-                                    <input type="text" class="form-control mr-sm-2" placeholder="Type Name"
-                                        aria-label="Name" aria-describedby="basic-addon1" id="name" name="name">
-                                    <button type="submit" class="btn btn-primary my-2 my-sm-0 mr-sm-2">Update</button>
-                                    <button type="submit" class="btn btn-danger my-2 my-sm-0">Delete</button>
-                                </form>
+                                <div class="form-inline my-2">
+                                    <form action="/productType/{{ $productTypes[$i]->id }}/update" method="POST">
+                                        @method('patch')
+                                        @csrf
+                                        <input type="text" class="form-control mr-sm-2" placeholder="Type Name"
+                                            aria-label="Name" aria-describedby="basic-addon1" id="name" name="name">
+                                        
+                                            <button type="submit" class="btn btn-primary my-2 my-sm-0 mr-sm-2">Update</button>
+                                    </form>
+                                    @include('layouts.errors')
+                                    <form action="/productType/{{ $productTypes[$i]->id }}/delete" method="post">
+                                        @method('delete')
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger my-2 my-sm-0">Delete</button>
+                                    </form>
+                                </div>
                             </td>
                         </tr>
                     @endfor

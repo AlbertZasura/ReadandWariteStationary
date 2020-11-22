@@ -1,4 +1,4 @@
-@extends('pages.form_template')
+@extends('layouts.form_template')
 @section('title', 'Register')
 
 @section('content_form')
