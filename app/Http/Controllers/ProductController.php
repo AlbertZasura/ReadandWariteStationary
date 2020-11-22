@@ -16,16 +16,10 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-<<<<<<< HEAD
         $products = Product::paginate(6);
         $users = Session::get('users');
         if($users == null)  return view('pages.home',['products' => $products]);
         else return view('pages.home',['products' => $products, 'users' => $users]);
-=======
-        $search = $request->get('search');
-        $products = Product::where("name",'like','%'.$search.'%')->paginate(6);
-        return view('pages.home',['products' => $products]);
->>>>>>> 3ede0f8d41dd20509ff958acd218b25bf7f25ad3
     }
 
     /**

@@ -34,17 +34,6 @@
                     <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
                 </form>
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Dropdown
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="/logout">Logout</a>
-                        </div>
-<<<<<<< HEAD:resources/views/pages/template.blade.php
-                    </li> --}}
                     @if (!Session::get('users'))
                         <li class="nav-item">
                             <a class="nav-link" href="/login">Login</a>
@@ -53,29 +42,30 @@
                             <a class="nav-link" href="/register">Register</a>
                         </li>   
                     @else
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Welcome</a>
-                        </li>     
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/logout') }}">Log out</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                @foreach ($users as $usr)
+                                    @if ($usr->name == 'member')
+                                        Member
+                                    @elseif($usr->name == 'admin')
+                                        Admin
+                                    @endif
+                                @endforeach
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="/logout">Logout</a>
+                            </div>
                         </li>
+                        @foreach ($users as $usr)
+                            @if ($usr->name == 'member')
+                                <button class="btn btn-primary my-2 mx-1 my-sm-0" type="submit">Cart</button>
+                                <button class="btn btn-primary my-2 mx-1 my-sm-0" type="submit">History</button>
+                            @endif
+                        @endforeach
                     @endif
                     
-=======
-                    </li>
-                    {{-- <li class="nav-item">
-                        <a class="nav-link" href="/login">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/register">Register</a>
-                    </li> --}}
-                    <li class="nav-item">
-                        <a class="btn btn-primary my-2 my-sm-0 mr-sm-2" href="/cart">Cart</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="btn btn-primary my-2 my-sm-0" href="/transaction">History</a>
-                    </li>
->>>>>>> 3ede0f8d41dd20509ff958acd218b25bf7f25ad3:resources/views/layouts/master.blade.php
                 </ul>
             </div>
         </div>

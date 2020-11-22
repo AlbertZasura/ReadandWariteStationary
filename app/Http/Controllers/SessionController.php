@@ -3,15 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-<<<<<<< HEAD
 use Validator;
 use Auth;
 use Session;
 use App\User;
-=======
-use App\User;
-use Illuminate\Support\Facades\Auth;
->>>>>>> 3ede0f8d41dd20509ff958acd218b25bf7f25ad3
 
 class SessionController extends Controller
 {
@@ -36,7 +31,6 @@ class SessionController extends Controller
         return redirect()->home();
     }
 
-<<<<<<< HEAD
     public function destroy(){
         auth()->logout();
         Session::forget('users');
@@ -68,11 +62,3 @@ class SessionController extends Controller
         return view('pages.home');
     }
 }
-=======
-    public function destroy()
-    {
-        Auth::logout();
-        return redirect()->home();
-    }
-}
->>>>>>> 3ede0f8d41dd20509ff958acd218b25bf7f25ad3
