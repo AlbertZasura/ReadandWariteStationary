@@ -29,6 +29,8 @@ Route::patch('/productType/{productType}/update', 'ProductTypeController@update'
 Route::delete('/productType/{productType}/delete', 'ProductTypeController@destroy');
 
 Route::get('/transaction', 'TransactionController@index');
+
+Route::get('/cart', 'CartController@create');
 // Route::get('/member' , function() {
 //   return view('pages.member');
 // });
