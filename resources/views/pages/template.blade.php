@@ -46,12 +46,22 @@
                             <a class="dropdown-item" href="#">Something else here</a>
                         </div>
                     </li> --}}
-                    <li class="nav-item">
-                        <a class="nav-link" href="/login">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/register">Register</a>
-                    </li>
+                    @if (!Session::get('users'))
+                        <li class="nav-item">
+                            <a class="nav-link" href="/login">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/register">Register</a>
+                        </li>   
+                    @else
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Welcome</a>
+                        </li>     
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/logout') }}">Log out</a>
+                        </li>
+                    @endif
+                    
                 </ul>
             </div>
         </div>

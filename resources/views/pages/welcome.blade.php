@@ -36,19 +36,19 @@
   <div class="welcome__pic">
     <div class="pic__container">
       <div class="pic">
-        <img src="{{ asset('img/dictionary.jpg') }}" alt="dictionary">
+        <img src="{{ asset('img/dictionary/dictionary.jpg') }}" alt="dictionary">
         <p>dictionary</p>
       </div>
       <div class="pic">
-        <img src="{{ asset('img/dictionary.jpg') }}" alt="dictionary">
+        <img src="{{ asset('img/dictionary/dictionary2.jpg') }}" alt="dictionary">
         <p>dictionary</p>
       </div>
       <div class="pic">
-        <img src="{{ asset('img/dictionary.jpg') }}" alt="dictionary">
+        <img src="{{ asset('img/dictionary/dictionary2.jpg') }}" alt="dictionary">
         <p>dictionary</p>
       </div>
       <div class="pic">
-        <img src="{{ asset('img/dictionary.jpg') }}" alt="dictionary">
+        <img src="{{ asset('img/dictionary/dictionaryp.jpg') }}" alt="dictionary">
         <p>dictionary</p>
       </div>
     </div>

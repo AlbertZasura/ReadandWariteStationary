@@ -6,7 +6,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'WelcomeController@getIndex')->name('home');
 
 Route::get('/login' , 'SessionController@create');
-// Route::get('/logout' , 'SessionController@destroy');
+Route::post('/login/auth', 'SessionController@checkLogin');
+Route::get('login/successlogin', 'SessionController@successLogin');
+Route::get('/logout' , 'SessionController@destroy');
 
 Route::get('/register' , 'RegisterController@create');
 Route::post('/register', 'RegisterController@store');
