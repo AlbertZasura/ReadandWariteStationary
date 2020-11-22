@@ -77,7 +77,9 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::find($id);
-        return view('stationaries.view',['product' => $product]);
+        $users = Session::get('users');
+        if($users == null)  return view('stationaries.view',['product' => $product]);
+        else return view('stationaries.view',['product' => $product, 'users' => $users]);
     }
 
     /**
@@ -90,7 +92,9 @@ class ProductController extends Controller
     {
         
         $product = Product::find($id);
-	    return view('stationaries.update',['product' => $product]);
+	    $users = Session::get('users');
+        if($users == null)  return view('stationaries.view',['product' => $product]);
+        else return view('stationaries.view',['product' => $product, 'users' => $users]);
     }
 
     /**
