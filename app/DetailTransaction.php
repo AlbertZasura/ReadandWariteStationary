@@ -8,11 +8,11 @@ class DetailTransaction extends Model
 {
     public function products()
     {
-        return $this->belongsTo('App\Product');
+        return $this->belongsTo(Product::class, 'product_id');
     }
 
     public function transactions()
     {
-        return $this->belongsTo('App\Transaction');
+        return $this->belongsTo(Transaction::class, 'transaction_id');
     }
 }

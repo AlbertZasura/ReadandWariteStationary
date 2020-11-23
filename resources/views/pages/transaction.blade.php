@@ -18,13 +18,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @for ($j = 0; $j < count($detailTransactions[$i]); $j++)
+                        @for ($j = 0; $j < count($transactions[$i]->detailTransactions); $j++)
                             <tr>
-                                <td>{{ $products[$i][$j]->name }}</td>
-                                <td>Rp{{ $products[$i][$j]->price }},00</td>
-                                <td>Quantity: {{ $detailTransactions[$i][$j]->qty }}</td>
+                                <td>{{ $transactions[$i]->detailTransactions[$j]->products->name }}</td>
+                                <td>Rp{{ $transactions[$i]->detailTransactions[$j]->products->price }},00</td>
+                                <td>Quantity: {{ $transactions[$i]->detailTransactions[$j]->qty }}</td>
                                 <td>Sub Total:
-                                    Rp{{ $detailTransactions[$i][$j]->qty * $products[$i][$j]->price }}</td>
+                                    Rp{{ (($transactions[$i]->detailTransactions[$j]->qty) * ($transactions[$i]->detailTransactions[$j]->products->price)) }}
+                                </td>
                             </tr>
 
                         @endfor
