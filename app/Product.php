@@ -10,7 +10,7 @@ class Product extends Model
 
     public function productTypes()
     {
-        return $this->belongsTo('App\ProductType');
+        return $this->belongsTo(ProductType::class, 'type_id');
     }
 
     public function carts()

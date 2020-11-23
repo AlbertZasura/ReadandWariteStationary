@@ -12,7 +12,7 @@
                     <h5 class="card-title">Stationary Name: {{ $product->name }}</h5>
                     <p class="card-text">Stationary Price: {{ $product->price }}<br />
                         Stationary Stock: {{ $product->stock }}<br />
-                        Stationary Type: {{ $product->type_id }}<br />
+                        Stationary Type: {{ $product->productTypes->name }}<br />
                         Stationary Description: {{ $product->description }}</p>
 
                     <div class="text-right float-right">
