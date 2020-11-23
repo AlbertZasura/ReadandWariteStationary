@@ -18,12 +18,11 @@
                     <div class="text-right float-right">
                         @if (Session::get('users')->role == 'member')
                             <div class="form-inline my-2">
-                                <form action="/productType/update" method="POST">
-                                    @method('patch')
+                                <form action="/cart/add/{{ $product->id }}" method="POST">
+                                    @method('post')
                                     @csrf
                                     <input type="number" class="form-control mr-sm-2" placeholder="Input Quantity"
                                         aria-label="qty" aria-describedby="basic-addon1" id="qty" name="qty">
-
                                     <button type="submit" class="btn btn-dark my-2 my-sm-0 mr-sm-2">Add to Cart</button>
                                 </form>
                                 @include('layouts.errors')

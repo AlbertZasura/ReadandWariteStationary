@@ -29,8 +29,12 @@ Route::delete('/productType/{productType}/delete', 'ProductTypeController@destro
 
 Route::get('/transaction', 'TransactionController@index');
 
+Route::delete('/cart/{carts}/delete', 'CartController@destroy'); // error soon to be fixed
 Route::get('/cart', 'CartController@create');
 Route::get('/cart/{userId}', 'CartController@show');
+Route::get('/cart/{carts}/update', 'CartController@update');
+Route::post('/cart/add/{productId}', 'CartController@add');
+Route::post('/cart/{carts}/update', 'CartController@fecth');
 // Route::get('/member' , function() {
 //   return view('pages.member');
 // });

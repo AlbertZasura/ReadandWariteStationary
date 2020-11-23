@@ -19,6 +19,9 @@
                         @yield('content_form')
                     </div>
                 </div>
+                @if (\Request::is('cart/*'))
+                    <div><a href="#" class="btn btn-danger my-2">Check Out</a></div>
+                @endif
             </div>
         </div>
     </div>
