@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ProductType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductTypeController extends Controller
 {
@@ -14,7 +15,7 @@ class ProductTypeController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.welcome');
     }
 
     /**
@@ -24,6 +25,11 @@ class ProductTypeController extends Controller
      */
     public function create()
     {
+        if(Auth::check() == false)return redirect('/home');
+        $user = Auth::user();
+        if($user->role == 'member'){
+            return redirect('/home');
+        }
 	    $productTypes = ProductType::get();
 	    return view('stationaryTypes.add',['productTypes' => $productTypes]);
     }
@@ -73,6 +79,11 @@ class ProductTypeController extends Controller
      */
     public function edit()
     {
+        if(Auth::check() == false)return redirect('/home');
+        $user = Auth::user();
+        if($user->role == 'member'){
+            return redirect('/home');
+        }
         $productTypes = ProductType::get();
 	    return view('stationaryTypes.update',['productTypes' => $productTypes]);
     }

@@ -3,11 +3,10 @@
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', 'WelcomeController@getIndex');
+Route::get('/', 'ProductTypeController@index');
 
 Route::get('/login' , 'SessionController@create');
 Route::post('/login/auth', 'SessionController@checkLogin');
-Route::get('login/successlogin', 'SessionController@successLogin');
 Route::get('/logout' , 'SessionController@destroy');
 
 Route::get('/register', 'RegisterController@create');

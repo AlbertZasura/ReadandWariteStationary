@@ -37,6 +37,10 @@ class SessionController extends Controller
     }
 
     public function checkLogin(Request $request) {
+        if (Auth::check() == true) {
+            return redirect()->home();
+        }
+        
         $this->validate($request, [
             'email' => 'required|email',
             'password' => 'required|alpha_num|min:6'
@@ -47,8 +51,7 @@ class SessionController extends Controller
             'password'  => $request->get('password')
         );
 
-        $users_data = User::all()->where('email', $user['email']);
-
+        $users_data = User::where('email', $user['email'])->first();
         if(Auth::attempt($user)) {
             Session::put('users', $users_data);
             return redirect('/home');
@@ -57,7 +60,4 @@ class SessionController extends Controller
         }
     }
 
-    public function successLogin() {
-        return view('pages.home');
-    }
 }

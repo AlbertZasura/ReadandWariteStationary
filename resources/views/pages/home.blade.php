@@ -3,9 +3,14 @@
 @section('title', 'home')
 
 @section('container__content')
-    <a href="{{ url('/product/add') }}" class="btn btn-primary mb-1" role="button">Add New Stationary</a>
-    <a href="{{ url('/productType/add') }}" class="btn btn-primary mb-1" role="button">Add New Stationary Type</a>
-    <a href="{{ url('/productType/edit') }}" class="btn btn-primary mb-1" role="button">Edit Stationary Type</a>
+
+    @if (Session::get('users'))
+        @if (Session::get('users')->role == 'admin')
+            <a href="{{ url('/product/add') }}" class="btn btn-primary mb-1" role="button">Add New Stationary</a>
+            <a href="{{ url('/productType/add') }}" class="btn btn-primary mb-1" role="button">Add New Stationary Type</a>
+            <a href="{{ url('/productType/edit') }}" class="btn btn-primary mb-1" role="button">Edit Stationary Type</a>
+        @endif
+    @endif
 
     <div class="container">
         @if (is_null($products[0]))

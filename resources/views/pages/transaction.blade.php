@@ -4,7 +4,7 @@
 
 @section('container__content')
     <div class="container">
-        @if (count($transactions)==0)
+        @if (count($transactions) == 0)
             <p>You don't have any Transaction</p>
         @else
             @for ($i = 0; $i < count($transactions); $i++)

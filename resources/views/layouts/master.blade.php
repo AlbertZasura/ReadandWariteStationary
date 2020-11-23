@@ -46,9 +46,10 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                @if (Session::get('users')->first()->name == 'member')
+
+                                @if (Session::get('users')->role == 'member')
                                     Member
-                                @elseif(Session::get('users')->first()->name == 'admin')
+                                @elseif(Session::get('users')->role == 'admin')
                                     Admin
                                 @endif
                             </a>
@@ -57,9 +58,9 @@
                                 <a class="dropdown-item" href="/logout">Logout</a>
                             </div>
                         </li>
-                        @if (Session::get('users')->first()->name == 'member')
-                            <a href="/cart/{{ Session::get('users')->first()->id }}" class="btn btn-primary my-2 mx-1 my-sm-0"
-                                type="submit">Cart</a>
+                        @if (Session::get('users')->role == 'member')
+                            <a href="/cart/{{ Session::get('users')->first()->id }}"
+                                class="btn btn-primary my-2 mx-1 my-sm-0" type="submit">Cart</a>
                             <a href="/transaction" class="btn btn-primary my-2 mx-1 my-sm-0" type="submit">History</a>
                         @endif
                     @endif

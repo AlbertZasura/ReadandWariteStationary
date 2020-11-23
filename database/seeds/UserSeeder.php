@@ -26,7 +26,7 @@ class UserSeeder extends Seeder
 
         for ($i=0; $i < 2; $i++) { 
             $user = new User;
-            $user->fill(["name" => $userNames[$i], "email" => $userEmails[$i],"password" => bcrypt($userPasswords[$i])]);
+            $user->fill(["name" => $userNames[$i],"role" => $userNames[$i], "email" => $userEmails[$i],"password" => bcrypt($userPasswords[$i])]);
             $user->save();
         }
     }

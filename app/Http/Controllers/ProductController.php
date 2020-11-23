@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Product;
 use App\ProductType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
@@ -28,6 +29,11 @@ class ProductController extends Controller
      */
     public function create()
     {
+        if(Auth::check() == false)return redirect('/home');
+        $user = Auth::user();
+        if($user->role == 'member'){
+            return redirect('/home');
+        }
         $productTypes = ProductType::all();
 	    $products = Product::get();
 	    return view('stationaries.add',['products' => $products,'productTypes' => $productTypes]);
@@ -75,6 +81,10 @@ class ProductController extends Controller
      */
     public function show($id)
     {
+        
+        if(Auth::check()==false){
+            return redirect('/login');
+        }
         $product = Product::find($id);
         
         return view('stationaries.view',['product' => $product]);
@@ -88,7 +98,11 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        
+        if(Auth::check() == false)return redirect('/home');
+        $user = Auth::user();
+        if($user->role == 'member'){
+            return redirect('/home');
+        }
         $product = Product::find($id);
         return view('stationaries.update',['product' => $product]);
     }

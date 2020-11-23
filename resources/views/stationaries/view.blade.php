@@ -16,7 +16,7 @@
                         Stationary Description: {{ $product->description }}</p>
 
                     <div class="text-right float-right">
-                        @if (Session::get('users')->first()->name == 'member')
+                        @if (Session::get('users')->role == 'member')
                             <div class="form-inline my-2">
                                 <form action="/productType/update" method="POST">
                                     @method('patch')
