@@ -30,7 +30,8 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <form action="/home" method="get" class="form-inline w-100 my-2 my-lg-2">
-                    <input class="form-control w-75 mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search">
+                    <input class="form-control w-75 mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+                        name="search">
                     <button class="btn btn-primary my-2 my-sm-0" type="submit">Search</button>
                 </form>
                 <ul class="navbar-nav mr-auto">
@@ -40,32 +41,29 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/register">Register</a>
-                        </li>   
+                        </li>
                     @else
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                @foreach ($users as $usr)
-                                    @if ($usr->name == 'member')
-                                        Member
-                                    @elseif($usr->name == 'admin')
-                                        Admin
-                                    @endif
-                                @endforeach
+                                @if (Session::get('users')->first()->name == 'member')
+                                    Member
+                                @elseif(Session::get('users')->first()->name == 'admin')
+                                    Admin
+                                @endif
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="/logout">Logout</a>
                             </div>
                         </li>
-                        @foreach ($users as $usr)
-                            @if ($usr->name == 'member')
-                                <a href="/cart/{{ $usr->id }}" class="btn btn-primary my-2 mx-1 my-sm-0" type="submit">Cart</a>
-                                <a href="{{ url('/') }}" class="btn btn-primary my-2 mx-1 my-sm-0" type="submit">History</a>
-                            @endif
-                        @endforeach
+                        @if (Session::get('users')->first()->name == 'member')
+                            <a href="/cart/{{ Session::get('users')->first()->id }}" class="btn btn-primary my-2 mx-1 my-sm-0"
+                                type="submit">Cart</a>
+                            <a href="/transaction" class="btn btn-primary my-2 mx-1 my-sm-0" type="submit">History</a>
+                        @endif
                     @endif
-                    
+
                 </ul>
             </div>
         </div>

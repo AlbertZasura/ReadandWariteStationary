@@ -16,30 +16,28 @@
                         Stationary Description: {{ $product->description }}</p>
 
                     <div class="text-right float-right">
-                        @foreach ($users as $usr)
-                            @if ($usr->name == 'member')
-                                <div class="form-inline my-2">
-                                    <form action="/productType/update" method="POST">
-                                        @method('patch')
-                                        @csrf
-                                        <input type="number" class="form-control mr-sm-2" placeholder="Input Quantity"
-                                            aria-label="qty" aria-describedby="basic-addon1" id="qty" name="qty">
-                                        
-                                            <button type="submit" class="btn btn-dark my-2 my-sm-0 mr-sm-2">Add to Cart</button>
-                                    </form>
-                                    @include('layouts.errors')
-                                </div>
-                            @else
-                                <div class="form-inline my-2">
-                                    <form action="/product/{{$product->id}}/delete" method="post">
-                                        @method('delete')
-                                        @csrf
-                                        <button type="submit" class="btn btn-danger my-2 my-sm-0 mr-sm-1">Delete</button>
-                                    </form>
-                                    <a href="/product/{{$product->id}}/edit" class="btn btn-primary my-2 my-sm-0">Edit</a>
-                                </div>
-                            @endif
-                        @endforeach
+                        @if (Session::get('users')->first()->name == 'member')
+                            <div class="form-inline my-2">
+                                <form action="/productType/update" method="POST">
+                                    @method('patch')
+                                    @csrf
+                                    <input type="number" class="form-control mr-sm-2" placeholder="Input Quantity"
+                                        aria-label="qty" aria-describedby="basic-addon1" id="qty" name="qty">
+
+                                    <button type="submit" class="btn btn-dark my-2 my-sm-0 mr-sm-2">Add to Cart</button>
+                                </form>
+                                @include('layouts.errors')
+                            </div>
+                        @else
+                            <div class="form-inline my-2">
+                                <form action="/product/{{ $product->id }}/delete" method="post">
+                                    @method('delete')
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger my-2 my-sm-0 mr-sm-1">Delete</button>
+                                </form>
+                                <a href="/product/{{ $product->id }}/edit" class="btn btn-primary my-2 my-sm-0">Edit</a>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>

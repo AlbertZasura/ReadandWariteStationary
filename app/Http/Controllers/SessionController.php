@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Validator;
-use Auth;
-use Session;
 use App\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class SessionController extends Controller
 {
@@ -32,7 +31,7 @@ class SessionController extends Controller
     }
 
     public function destroy(){
-        auth()->logout();
+        Auth::logout();
         Session::forget('users');
         return redirect()->home();
     }
