@@ -18,8 +18,8 @@
                     <div class="text-right float-right">
                         @if (Session::get('users')->role == 'member')
                             <div class="form-inline my-2">
-                                <form action="/cart/{{ $carts->id }}/update" method="POST">
-                                    @method('post')
+                                <form action="/cart/update/{{ $carts->id }}" method="POST">
+                                    @method('patch')
                                     @csrf
                                     <input type="number" class="form-control mr-sm-2" placeholder="Input Quantity"
                                         aria-label="qty" aria-describedby="basic-addon1" id="qty" name="qty">
