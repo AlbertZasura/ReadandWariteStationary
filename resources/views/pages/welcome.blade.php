@@ -38,27 +38,19 @@
             </form>
         </div>
     </div>
-  </div>
-  
-  <div class="welcome__pic">
-    <div class="pic__container">
-      <div class="pic">
-        <img src="{{ asset('img/dictionary/dictionary.jpg') }}" alt="dictionary">
-        <p>dictionary</p>
-      </div>
-      <div class="pic">
-        <img src="{{ asset('img/dictionary/dictionary2.jpg') }}" alt="dictionary">
-        <p>dictionary</p>
-      </div>
-      <div class="pic">
-        <img src="{{ asset('img/dictionary/dictionary2.jpg') }}" alt="dictionary">
-        <p>dictionary</p>
-      </div>
-      <div class="pic">
-        <img src="{{ asset('img/dictionary/dictionaryp.jpg') }}" alt="dictionary">
-        <p>dictionary</p>
-      </div>
     </div>
+
+    <div class="welcome__pic">
+        <div class="pic__container">
+            @foreach ($productTypes as $productType)
+                <div class="pic">
+                    <a href="/home?search={{ $productType->id }}">
+                        <img src="{{ asset($productType->image) }}" alt="{{ $productType->name }}">
+                      </a>
+                    </form>
+                </div>
+            @endforeach
+        </div>
 </body>
 
 </html>
