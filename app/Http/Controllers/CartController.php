@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use App\ProductType;
+use App\Transaction;
+use App\DetailTransaction;
 use App\Cart;
 use Session;
 
@@ -62,9 +64,34 @@ class CartController extends Controller
         $users = Session::get('users');
         $carts = Cart::find($id);
         $products = Product::find($carts->product_id);
-        if($request->qty <= 0 || $products->stock < $request->qty) return view('cart.update', ['users' => $users, 'carts' => $carts]);
+        if($request->qty <= 0 || $products->stock < $request->qty) {
+            return view('cart.update')->with('carts', $carts)->with('error', 'Wrong Input Quanity');
+        }
         $carts->qty = $request->qty;
         $carts->save();
-        return redirect('/cart/'.$users->id);
+        return view('cart.update', ['carts' => $carts]);
+    }
+
+    public function checkOut(Request $request, $user_id) {
+        $transaction = Transaction::create([
+            'user_id' => $user_id,
+            'date' => now()
+        ]);
+        
+        $carts = Cart::all()->where('user_id', $user_id);
+        foreach($carts as $cart) {
+            $products = Product::find($cart->product_id);
+            // decrease stock product with cart qty
+            $products->stock = $products->stock - $cart->qty;
+            $products->save();
+
+            $detailTransaction = DetailTransaction::create([
+                'transaction_id' => $transaction->id,
+                'product_id' => $products->id,
+                'qty' => $cart->qty
+            ]);
+            Cart::destroy($cart->id);
+        }
+        return redirect('/transaction');
     }
 }

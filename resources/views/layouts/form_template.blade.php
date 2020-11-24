@@ -20,7 +20,10 @@
                     </div>
                 </div>
                 @if (\Request::is('cart/*'))
-                    <div><a href="#" class="btn btn-danger my-2">Check Out</a></div>
+                    <form action="/cart/{{ $users->id }}/checkout" method="post">
+                        @csrf
+                        <button class="btn btn-danger my-2">Check Out</button>
+                    </form>
                 @endif
             </div>
         </div>

@@ -32,6 +32,7 @@ Route::get('/transaction', 'TransactionController@index');
 Route::get('/cart/{userId}', 'CartController@show');
 Route::patch('/cart/{carts}/update', 'CartController@update');
 Route::delete('/cart/{carts}/delete', 'CartController@destroy');
+Route::post('/cart/{users}/checkout', 'CartController@checkOut');
 Route::post('/cart/add/{productId}', 'CartController@add');
 Route::patch('/cart/update/{carts}', 'CartController@fecth');
 // Route::get('/member' , function() {

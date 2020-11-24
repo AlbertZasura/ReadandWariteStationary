@@ -25,8 +25,8 @@
                                         aria-label="qty" aria-describedby="basic-addon1" id="qty" name="qty">
                                     <button type="submit" class="btn btn-dark my-2 my-sm-0 mr-sm-2">Update Cart</button>
                                 </form>
-                                @include('layouts.errors')
                             </div>
+                            @include('layouts.errors')
                         @endif
                     </div>
                 </div>
