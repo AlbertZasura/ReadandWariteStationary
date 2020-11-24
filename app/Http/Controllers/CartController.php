@@ -61,7 +61,8 @@ class CartController extends Controller
     public function fecth(Request $request, $id) {
         $users = Session::get('users');
         $carts = Cart::find($id);
-        if($request->qty <= 0) return view('cart.update', ['users' => $users, 'carts' => $carts]);
+        $products = Product::find($carts->product_id);
+        if($request->qty <= 0 || $products->stock < $request->qty) return view('cart.update', ['users' => $users, 'carts' => $carts]);
         $carts->qty = $request->qty;
         $carts->save();
         return redirect('/cart/'.$users->id);
