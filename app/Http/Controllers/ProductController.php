@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\Product;
 use App\ProductType;
 use Illuminate\Http\Request;
-use Session;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
@@ -16,10 +17,9 @@ class ProductController extends Controller
      */
     public function index(Request $request)
     {
-        $products = Product::paginate(6);
-        $users = Session::get('users');
-        if($users == null)  return view('pages.home',['products' => $products]);
-        else return view('pages.home',['products' => $products, 'users' => $users]);
+        $search = $request->get('search');
+        $products = Product::where("name", 'like', '%' . $search . '%')->paginate(6);
+        return view('pages.home', ['products' => $products]);
     }
 
     /**
@@ -29,9 +29,14 @@ class ProductController extends Controller
      */
     public function create()
     {
+        if (Auth::check() == false) return redirect('/home');
+        $user = Auth::user();
+        if ($user->role == 'member') {
+            return redirect('/home');
+        }
         $productTypes = ProductType::all();
-	    $products = Product::get();
-	    return view('stationaries.add',['products' => $products,'productTypes' => $productTypes]);
+        $products = Product::get();
+        return view('stationaries.add', ['products' => $products, 'productTypes' => $productTypes]);
     }
 
     /**
@@ -52,17 +57,17 @@ class ProductController extends Controller
         ]);
 
         $image = $request->image;
-        if($image){
-            $image->move('asset',$image->getClientOriginalName());
+        if ($image) {
+            $image->move('asset', $image->getClientOriginalName());
         }
-        
+
         Product::create([
             'name' => $request->name,
             'type_id' => $request->type_id,
             'stock' => $request->stock,
             'price' => $request->price,
             'description' => $request->description,
-            'image' =>  "asset/".$image->getClientOriginalName()
+            'image' =>  "asset/" . $image->getClientOriginalName()
         ]);
 
         return redirect('/product/add');
@@ -76,10 +81,12 @@ class ProductController extends Controller
      */
     public function show($id)
     {
+        if (Auth::check() == false) {
+            return redirect('/login');
+        }
         $product = Product::find($id);
-        $users = Session::get('users');
-        if($users == null)  return view('stationaries.view',['product' => $product]);
-        else return view('stationaries.view',['product' => $product, 'users' => $users]);
+
+        return view('stationaries.view', ['product' => $product]);
     }
 
     /**
@@ -90,10 +97,13 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
+        if (Auth::check() == false) return redirect('/home');
+        $user = Auth::user();
+        if ($user->role == 'member') {
+            return redirect('/home');
+        }
         $product = Product::find($id);
-	    $users = Session::get('users');
-        if($users == null)  return view('stationaries.view',['product' => $product]);
-        else return view('stationaries.view',['product' => $product, 'users' => $users]);
+        return view('stationaries.update', ['product' => $product]);
     }
 
     /**
@@ -118,7 +128,7 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->save();
 
-        return redirect("/product/".$id."/edit");
+        return redirect("/product/" . $id . "/edit");
     }
 
     /**
