@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\DetailTransaction;
+use App\Product;
 use App\ProductType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProductTypeController extends Controller
 {
@@ -15,7 +18,26 @@ class ProductTypeController extends Controller
      */
     public function index()
     {
-        return view('pages.welcome');
+        $products = DetailTransaction::select(DB::raw('SUM(qty) as quantity, product_id'))
+        ->groupBy('product_id')
+        ->orderBy('quantity', 'DESC')->get();
+
+        $productTypes = ["","","",""];
+        for ($i = 0; $i < count($products); $i++) {
+            $temp = $products[$i]->products->productTypes;
+            for ($j = 0; $j < 4; $j++) {
+                if($productTypes[$j]==null){
+                    $productTypes[$i] = $products[$i]->products->productTypes;
+                    break;
+                }
+                if ($productTypes[$j] == $temp) {
+                    break;
+                }
+            }
+            if($productTypes[3]!=null)break;
+        }
+        // dd($productTypes);
+        return view('pages.welcome',["productTypes" => $productTypes]);
     }
 
     /**
@@ -25,13 +47,13 @@ class ProductTypeController extends Controller
      */
     public function create()
     {
-        if(Auth::check() == false)return redirect('/home');
+        if (Auth::check() == false) return redirect('/home');
         $user = Auth::user();
-        if($user->role == 'member'){
+        if ($user->role == 'member') {
             return redirect('/home');
         }
-	    $productTypes = ProductType::get();
-	    return view('stationaryTypes.add',['productTypes' => $productTypes]);
+        $productTypes = ProductType::get();
+        return view('stationaryTypes.add', ['productTypes' => $productTypes]);
     }
 
     /**
@@ -48,10 +70,10 @@ class ProductTypeController extends Controller
         ]);
 
         $image = $request->image;
-        if($image){
-            $image->move('asset',$image->getClientOriginalName());
+        if ($image) {
+            $image->move('asset', $image->getClientOriginalName());
         }
-        
+
         ProductType::create([
             'name' => $request->name,
             'image' =>  $image->getClientOriginalName()
@@ -79,13 +101,13 @@ class ProductTypeController extends Controller
      */
     public function edit()
     {
-        if(Auth::check() == false)return redirect('/home');
+        if (Auth::check() == false) return redirect('/home');
         $user = Auth::user();
-        if($user->role == 'member'){
+        if ($user->role == 'member') {
             return redirect('/home');
         }
         $productTypes = ProductType::get();
-	    return view('stationaryTypes.update',['productTypes' => $productTypes]);
+        return view('stationaryTypes.update', ['productTypes' => $productTypes]);
     }
 
     /**

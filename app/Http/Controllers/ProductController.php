@@ -18,7 +18,11 @@ class ProductController extends Controller
     public function index(Request $request)
     {
         $search = $request->get('search');
-        $products = Product::where("name", 'like', '%' . $search . '%')->paginate(6);
+        if(is_numeric($search)){
+            $products = Product::where("type_id", $search)->paginate(6);
+        }else{
+            $products = Product::where("name", 'like', '%' . $search . '%')->paginate(6);
+        }
         return view('pages.home', ['products' => $products]);
     }
 
