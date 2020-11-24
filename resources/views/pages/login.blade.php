@@ -2,6 +2,7 @@
 @section('title', 'Login')
 
 @section('content_form')
+@include('layouts.errors')
     <form action={{ url('/login/auth') }} method="POST">
         {{ csrf_field() }}
         <div class="form-group row">
@@ -23,6 +24,5 @@
         <div class="col-md-6 offset-md-4">
             <button type="submit" class="btn btn-primary">Login</button>
         </div>
-        @include('layouts.errors')
     </form>
 @endsection

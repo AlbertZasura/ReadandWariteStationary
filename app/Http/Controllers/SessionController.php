@@ -56,7 +56,7 @@ class SessionController extends Controller
             Session::put('users', $users_data);
             return redirect('/home');
         } else {
-            return back()->with('error', 'Wrong Login Detail');
+            return back()->with('error', 'Wrong combination of Email and Password');
         }
     }
 

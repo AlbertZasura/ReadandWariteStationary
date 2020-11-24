@@ -50,8 +50,8 @@ class ProductController extends Controller
         $this->validate($request, [
             'name' => 'required|min:5|unique:products,name',
             'type_id' => 'required',
-            'stock' => 'required|integer|min:0',
-            'price' => 'required|integer|min:5000',
+            'stock' => 'required|integer|min:1',
+            'price' => 'required|integer|min:5001',
             'description' => 'required|min:10',
             'image' => 'required|file|image|mimes:jpeg,png,jpg'
         ]);
@@ -70,7 +70,7 @@ class ProductController extends Controller
             'image' =>  "asset/" . $image->getClientOriginalName()
         ]);
 
-        return redirect('/product/add');
+        return redirect('/product/add')->with(['success' => 'Add Product Successfully']);
     }
 
     /**
@@ -117,8 +117,8 @@ class ProductController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|min:5|unique:products,name',
-            'stock' => 'required|integer|min:0',
-            'price' => 'required|integer|min:5000',
+            'stock' => 'required|integer|min:1',
+            'price' => 'required|integer|min:5001',
             'description' => 'required|min:10',
         ]);
         $product = Product::find($id);

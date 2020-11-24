@@ -18,6 +18,7 @@
                             <td class="border border-primary">{{ $i + 1 }}</td>
                             <td class="border border-primary">{{ $productTypes[$i]->name }}</td>
                             <td class="border border-primary">
+                                @include('layouts.errors')
                                 <div class="form-inline my-2">
                                     <form action="/productType/{{ $productTypes[$i]->id }}/update" method="POST">
                                         @method('patch')
@@ -27,7 +28,6 @@
                                         
                                             <button type="submit" class="btn btn-primary my-2 my-sm-0 mr-sm-2">Update</button>
                                     </form>
-                                    @include('layouts.errors')
                                     <form action="/productType/{{ $productTypes[$i]->id }}/delete" method="post">
                                         @method('delete')
                                         @csrf
