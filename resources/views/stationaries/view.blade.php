@@ -5,7 +5,7 @@
     <div class="card mb-3">
         <div class="row no-gutters align-items-center">
             <div class="col-md-4">
-                <img src="{{ asset($product->image) }}" class="card-img" alt="{{ $product->name }}">
+                <img src="{{ asset('/storage/images/products/'.$product->image) }}" class="card-img" alt="{{ $product->name }}">
             </div>
             <div class="col-md-8 ">
                 <div class="card-body">

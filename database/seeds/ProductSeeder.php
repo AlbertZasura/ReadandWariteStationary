@@ -24,13 +24,13 @@ class ProductSeeder extends Seeder
         ];
 
         $productPhotos = [
-            "img/pen/penp2.jpg","img/pen/penp3.jpg",
-            "img/pencil/pencilp.jpg","img/pencil/pencilbox.jpg",
-            "img/ruler/rulerp.jpg","img/ruler/rulerp1.jpg",
-            "img/notebook/bookp1.jpg","img/notebook/notep.jpg",
-            "img/dictionary/dictionary2.jpg","img/dictionary/dictionaryp.jpg",
-            "img/smartPen/smartpenp.jpg","img/smartPen/smartpenp2.jpg",
-            "img/smartNote/smartNotep.jpg","img/smartNote/tabletp.jpg"
+            "penp2.jpg","penp3.jpg",
+            "pencilp.jpg","pencilbox.jpg",
+            "rulerp.jpg","rulerp1.jpg",
+            "bookp1.jpg","notep.jpg",
+            "dictionary2.jpg","dictionaryp.jpg",
+            "smartpenp.jpg","smartpenp2.jpg",
+            "smartNotep.jpg","tabletp.jpg"
         ];
 
 
