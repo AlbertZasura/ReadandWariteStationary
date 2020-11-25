@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 
+
 Route::get('/', 'ProductTypeController@index');
 
 Route::get('/login' , 'SessionController@create');
@@ -36,10 +37,8 @@ Route::delete('/cart/{carts}/delete', 'CartController@destroy');
 Route::post('/cart/checkout', 'CartController@checkOut');
 Route::post('/cart/add/{productId}', 'CartController@add');
 Route::patch('/cart/update/{carts}', 'CartController@fecth');
-// Route::get('/member' , function() {
-//   return view('pages.member');
-// });
 
-// Route::get('/admin' , function() {
-//   return view('pages.admin');
-// });
+
+//Testing Cookie
+Route::get('/cookie/set', 'CookieController@setCookie');
+Route::get('/cookie/get', 'CookieController@getCookie');
