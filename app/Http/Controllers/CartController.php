@@ -54,6 +54,9 @@ class CartController extends Controller
     }
 
     public function update($id) {
+        if (Auth::check() == false) {
+            return redirect()->home();
+        }
         $carts = Cart::find($id);
         return view('cart.update', ['carts' => $carts]);
     }
