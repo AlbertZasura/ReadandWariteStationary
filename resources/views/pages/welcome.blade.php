@@ -18,39 +18,40 @@
     <nav class="navbar navbar-expand-lg navbar-light">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link text-uppercase" href="/login">Login</a>
+                <a class="nav-link text-uppercase font-weight-bold mr-sm-4" href="/login">Login</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-uppercase" href="/register">Register</a>
+                <a class="nav-link text-uppercase font-weight-bold" href="/register">Register</a>
             </li>
         </ul>
     </nav>
-    <div class="flex-center position-ref full-height">
-        <div class="content">
-            <div class="title m-b-md">
-                ReadAndWArite
-            </div>
-            <form action="/home" method="get" class="form-inline w-100">
-                <div class="input">
-                    <input type="search" aria-label="Search" name="search" placeholder="Search for stationary">
-                </div>
-                <button class="search btn btn-primary my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
-    </div>
-    </div>
 
-    <div class="welcome__pic">
-        <div class="pic__container">
-            @foreach ($productTypes as $productType)
-                <div class="pic">
-                    <a href="/home?search={{ $productType->type_id }}">
-                        <img src="{{ asset($productType->image) }}" alt="{{ $productType->name }}">
-                      </a>
-                    </form>
+    <div class="flex-center position-ref full-height">
+        <div class="container">
+            <div class="content">
+                <div class="title m-b-md">
+                    ReadAndWArite
                 </div>
-            @endforeach
+                <form action="/home" method="get" class="form-inline w-100 justify-content-center">
+                    <div class="input">
+                        <input type="search" aria-label="Search" name="search" placeholder="Search for stationary">
+                    </div>
+                    <button class="search btn btn-primary my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+            <div class="break pic__container row">
+                @foreach ($productTypes as $productType)
+                    <div class="col-md-3 pic">
+                        <a href="/home?search={{ $productType->type_id }}">
+                            <img src="{{ asset($productType->image) }}" class="img-fluid"
+                                alt="{{ $productType->name }}">
+                            <p>{{ $productType->name }}</p>
+                        </a>
+                    </div>
+                @endforeach
+            </div>
         </div>
+    </div>
 </body>
 
 </html>
