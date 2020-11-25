@@ -19,9 +19,9 @@ class ProductTypeSeeder extends Seeder
         ];
 
         $productTypePhotos = [
-            "img/pen/pen.jpg","img/pencil/pencil.jpg","img/ruler/ruler.jpg",
-            "img/notebook/book.jpg","img/dictionary/dictionary.jpg","img/smartPen/smartpen.jpg",
-            "img/smartNote/smartNote.jpg"
+            "pen.jpg","pencil.jpg","ruler.jpg",
+            "book.jpg","dictionary.jpg","smartpen.jpg",
+            "smartNote.jpg"
         ];
 
         for ($i=0; $i < 7; $i++) { 

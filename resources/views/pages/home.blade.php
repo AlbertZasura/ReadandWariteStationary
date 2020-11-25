@@ -21,7 +21,7 @@
                     @if (count($products) > $i)
                         <div class="card col-sm-4 p-0">
                             <a href="/product/{{ $products[$i]->id }}"><img class="card-img-top"
-                                    src="{{ asset($products[$i]->image) }}" alt="{{ $products[$i]->name }}"></a>
+                                    src="{{ asset('/storage/images/products/'.$products[$i]->image) }}" alt="{{ $products[$i]->name }}"></a>
                             <div class="card-body">
                                 <h5 class="card-title text-primary">{{ $products[$i]->name }}</h5>
                                 <p class="card-text">{{ $products[$i]->description }}</p>
@@ -36,7 +36,7 @@
                     @if (count($products) > $i)
                         <div class="card col-sm-4 p-0">
                             <a href="/product/{{ $products[$i]->id }}"><img class="card-img-top"
-                                    src="{{ asset($products[$i]->image) }}" alt="{{ $products[$i]->name }}"></a>
+                                    src="{{ asset('/storage/images/products/'.$products[$i]->image) }}" alt="{{ $products[$i]->name }}"></a>
                             <div class="card-body">
                                 <h5 class="card-title text-primary">{{ $products[$i]->name }}</h5>
                                 <p class="card-text">{{ $products[$i]->description }}</p>

@@ -62,7 +62,10 @@ class ProductController extends Controller
 
         $image = $request->image;
         if ($image) {
-            $image->move('asset', $image->getClientOriginalName());
+            $destination_path = 'public/images/products';
+            $image_name = $image->getClientOriginalName();
+            $path = $request->image->storeAs($destination_path,$image_name);
+            // $image->move('asset', $image->getClientOriginalName());
         }
 
         Product::create([
@@ -71,7 +74,7 @@ class ProductController extends Controller
             'stock' => $request->stock,
             'price' => $request->price,
             'description' => $request->description,
-            'image' =>  "asset/" . $image->getClientOriginalName()
+            'image' =>  $image_name
         ]);
 
         return redirect('/product/add')->with(['success' => 'Add Product Successfully']);
