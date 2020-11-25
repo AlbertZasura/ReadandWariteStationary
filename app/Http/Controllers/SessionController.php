@@ -70,11 +70,13 @@ class SessionController extends Controller
 
         if(Auth::attempt($user)) {
             Session::put('users', $users_data);
+            // $minutes=0;
             if(!empty($request->RememberMe)) {
                 $minutes = 120;
                 $response = new Response('Hello World');
+                return redirect('/home')->withCookie(cookie('user_email', $user['email'], $minutes))->withCookie(cookie('user_password', $user['password'], $minutes));
             }
-            return redirect('/home')->withCookie(cookie('user_email', $user['email'], $minutes))->withCookie(cookie('user_password', $user['password'], $minutes));
+            return redirect('/home');
         } else {
             return back()->with('error', 'Wrong combination of Email and Password');
         }
