@@ -74,10 +74,8 @@ class SessionController extends Controller
             if(!empty($request->RememberMe)) {
                 $minutes = 120;
                 $response = new Response('Hello World');
-                $response->withCookie(cookie('user_email', $user['email'], $minutes));
-                $response->withCookie(cookie('user_password', $user['password'], $minutes));
             }
-            return redirect('/home');
+            return redirect('/home')->withCookie(cookie('user_email', $user['email'], $minutes))->withCookie(cookie('user_password', $user['password'], $minutes));
         } else {
             return back()->with('error', 'Wrong combination of Email and Password');
         }
