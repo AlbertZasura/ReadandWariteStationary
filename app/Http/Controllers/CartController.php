@@ -62,7 +62,6 @@ class CartController extends Controller
     }
 
     public function fecth(Request $request, $id) {
-        $users = Session::get('users');
         $carts = Cart::find($id);
         $products = Product::find($carts->product_id);
         if($request->qty <= 0 || $products->stock < $request->qty) {
