@@ -29,11 +29,11 @@ Route::delete('/productType/{productType}/delete', 'ProductTypeController@destro
 
 Route::get('/transaction', 'TransactionController@index');
 
-Route::get('/cart/{userId}', 'CartController@show');
+Route::get('/cart', 'CartController@show');
 Route::get('/cart/{carts}/update', 'CartController@update');
 Route::patch('/cart/{carts}/update', 'CartController@update');
 Route::delete('/cart/{carts}/delete', 'CartController@destroy');
-Route::post('/cart/{users}/checkout', 'CartController@checkOut');
+Route::post('/cart/checkout', 'CartController@checkOut');
 Route::post('/cart/add/{productId}', 'CartController@add');
 Route::patch('/cart/update/{carts}', 'CartController@fecth');
 // Route::get('/member' , function() {

@@ -4,33 +4,33 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
-use App\ProductType;
 use App\Transaction;
 use App\DetailTransaction;
 use App\Cart;
-use Session;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
     public function create() {
-        $users = Session::get('users');
-        if($users == null) return view('pages.cart');
-        else return view('cart.view', ['users' => $users]);
+        
     }
 
-    public function show($cart) {
-        $users = Session::get('users');
-        $carts = Cart::all()->where('user_id', $cart);
-        return view('cart.view', ['users' => $users, 'carts' => $carts]);
+    public function show() {
+        if (Auth::check() == false) {
+            return redirect()->home();
+        }
+        $carts = Cart::all()->where('user_id',Session::get('users')->id);
+        return view('cart.view', ['carts' => $carts]);
     }
 
     public function add(Request $request, $productId) {
         $this->validate(request(), [
-            'qty' => 'required|min:0'
+            'qty' => 'required|min:1'
         ]);
 
         $products = Product::find($productId);
-        if($products->stock < $request->qty || $request->qty < 0) return back()->with('error', 'Out of Stock');
+        if($products->stock < $request->qty || $request->qty <= 0) return back()->with('error', 'Invalid Stock');
         else {
             $carts = Cart::where('user_id', Session::get('users')->id)->where('product_id', $products->id)->first();
             if($carts) {
@@ -50,14 +50,12 @@ class CartController extends Controller
 
     public function destroy($carts) {
         Cart::destroy($carts);
-        $users = Session::get('users');
-        return redirect('/cart/'.$users->id);
+        return redirect('/cart');
     }
 
     public function update($id) {
-        $users = Session::get('users');
         $carts = Cart::find($id);
-        return view('cart.update', ['users' => $users, 'carts' => $carts]);
+        return view('cart.update', ['carts' => $carts]);
     }
 
     public function fecth(Request $request, $id) {
@@ -79,13 +77,13 @@ class CartController extends Controller
         return view('cart.update', ['carts' => $carts]);
     }
 
-    public function checkOut(Request $request, $user_id) {
+    public function checkOut() {
         $transaction = Transaction::create([
-            'user_id' => $user_id,
+            'user_id' => Session::get('users')->id,
             'date' => now()
         ]);
         
-        $carts = Cart::all()->where('user_id', $user_id);
+        $carts = Cart::all()->where('user_id', Session::get('users')->id,);
         foreach($carts as $cart) {
             $products = Product::find($cart->product_id);
             // decrease stock product with cart qty
