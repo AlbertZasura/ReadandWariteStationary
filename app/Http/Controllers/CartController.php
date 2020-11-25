@@ -61,11 +61,18 @@ class CartController extends Controller
     }
 
     public function fecth(Request $request, $id) {
-        $users = Session::get('users');
         $carts = Cart::find($id);
         $products = Product::find($carts->product_id);
+        
+        $this->validate($request, [
+            'qty' => 'required|min:0|max:'.$products->stock
+        ]);
+        
         if($request->qty <= 0 || $products->stock < $request->qty) {
-            return view('cart.update')->with('carts', $carts)->with('error', 'Wrong Input Quanity');
+            $errorMessage = null;
+            if($request->qty <= 0) $errorMessage = 'Input At least bigger than 0';
+            else $errorMessage = 'The Quantity must lower than '.$products->stock; 
+            return back()->with('carts', $carts)->with('error', $errorMessage);
         }
         $carts->qty = $request->qty;
         $carts->save();
