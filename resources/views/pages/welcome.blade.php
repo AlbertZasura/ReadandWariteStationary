@@ -44,7 +44,7 @@
         <div class="pic__container">
             @foreach ($productTypes as $productType)
                 <div class="pic">
-                    <a href="/home?search={{ $productType->id }}">
+                    <a href="/home?search={{ $productType->type_id }}">
                         <img src="{{ asset($productType->image) }}" alt="{{ $productType->name }}">
                       </a>
                     </form>

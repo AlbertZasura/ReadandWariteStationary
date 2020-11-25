@@ -59,7 +59,7 @@
                             </div>
                         </li>
                         @if (Session::get('users')->role == 'member')
-                            <a href="/cart/{{ Session::get('users')->id }}"
+                            <a href="/cart"
                                 class="btn btn-primary my-2 mx-1 my-sm-0" type="submit">Cart</a>
                             <a href="/transaction" class="btn btn-primary my-2 mx-1 my-sm-0" type="submit">History</a>
                         @endif

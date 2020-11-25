@@ -18,26 +18,16 @@ class ProductTypeController extends Controller
      */
     public function index()
     {
-        $products = DetailTransaction::select(DB::raw('SUM(qty) as quantity, product_id'))
-        ->groupBy('product_id')
-        ->orderBy('quantity', 'DESC')->get();
+        $productTypes = DetailTransaction::select('products.type_id','product_types.name','product_types.image', DB::raw('sum(qty) as quantity'))
+            ->join('products', 'products.id', '=', 'detail_transactions.product_id')
+            ->join('product_types', 'products.type_id', '=', 'product_types.id')
+            ->groupBy('type_id','product_types.name','product_types.image')
+            ->orderBy('quantity', 'DESC')
+            ->limit(4)
+            ->get();
 
-        $productTypes = ["","","",""];
-        for ($i = 0; $i < count($products); $i++) {
-            $temp = $products[$i]->products->productTypes;
-            for ($j = 0; $j < 4; $j++) {
-                if($productTypes[$j]==null){
-                    $productTypes[$i] = $products[$i]->products->productTypes;
-                    break;
-                }
-                if ($productTypes[$j] == $temp) {
-                    break;
-                }
-            }
-            if($productTypes[3]!=null)break;
-        }
         // dd($productTypes);
-        return view('pages.welcome',["productTypes" => $productTypes]);
+        return view('pages.welcome', ["productTypes" => $productTypes]);
     }
 
     /**
