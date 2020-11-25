@@ -20,8 +20,7 @@ class CartController extends Controller
         if (Auth::check() == false) {
             return redirect()->home();
         }
-        $users = Session::get('users');
-        $carts = Cart::all()->where('user_id',$users->id);
+        $carts = Cart::all()->where('user_id',Session::get('users')->id);
         return view('cart.view', ['carts' => $carts]);
     }
 
@@ -51,12 +50,10 @@ class CartController extends Controller
 
     public function destroy($carts) {
         Cart::destroy($carts);
-        $users = Session::get('users');
         return redirect('/cart');
     }
 
     public function update($id) {
-        $users = Session::get('users');
         $carts = Cart::find($id);
         return view('cart.update', ['carts' => $carts]);
     }
@@ -64,8 +61,16 @@ class CartController extends Controller
     public function fecth(Request $request, $id) {
         $carts = Cart::find($id);
         $products = Product::find($carts->product_id);
+        
+        $this->validate($request, [
+            'qty' => 'required|min:0|max:'.$products->stock
+        ]);
+        
         if($request->qty <= 0 || $products->stock < $request->qty) {
-            return view('cart.update')->with('carts', $carts)->with('error', 'Wrong Input Quanity');
+            $errorMessage = null;
+            if($request->qty <= 0) $errorMessage = 'Input At least bigger than 0';
+            else $errorMessage = 'The Quantity must lower than '.$products->stock; 
+            return back()->with('carts', $carts)->with('error', $errorMessage);
         }
         $carts->qty = $request->qty;
         $carts->save();

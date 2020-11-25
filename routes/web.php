@@ -30,6 +30,7 @@ Route::delete('/productType/{productType}/delete', 'ProductTypeController@destro
 Route::get('/transaction', 'TransactionController@index');
 
 Route::get('/cart', 'CartController@show');
+Route::get('/cart/{carts}/update', 'CartController@update');
 Route::patch('/cart/{carts}/update', 'CartController@update');
 Route::delete('/cart/{carts}/delete', 'CartController@destroy');
 Route::post('/cart/checkout', 'CartController@checkOut');
