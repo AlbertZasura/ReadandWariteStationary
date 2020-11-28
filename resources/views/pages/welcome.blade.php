@@ -42,9 +42,9 @@
             <div class="break pic__container row">
                 @foreach ($productTypes as $productType)
                     <div class="col-md-3 pic">
-                        <a href="/home?search={{ $productType->type_id }}">
-                            <img src="{{ asset('/storage/images/productTypes/'.$productType->image) }}" class="img-fluid"
-                                alt="{{ $productType->name }}">
+                        <a href="/home?category={{ $productType->type_id }}">
+                            <img src="{{ asset('/storage/images/productTypes/' . $productType->image) }}"
+                                class="img-fluid" alt="{{ $productType->name }}">
                             <p>{{ $productType->name }}</p>
                         </a>
                     </div>

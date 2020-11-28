@@ -6,7 +6,6 @@ use App\Product;
 use App\ProductType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
 class ProductController extends Controller
 {
@@ -16,19 +15,16 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
-
     public function index(Request $request)
     {
         $search = $request->get('search');
-        // if(is_numeric($search)){
-        //     $products = Product::where()->paginate(6);
-        // }else{
-            $products = Product::where("name", 'like', '%' . $search . '%')->orWhere("type_id", $search)->paginate(6);
-        // }
+        $category = $request->get('category');
+        if ($category != null) {
+            $products = Product::where("type_id", $category)->paginate(6);
+        } else {
+            $products = Product::where("name", 'like', '%' . $search . '%')->paginate(6);
+        }
+
         return view('pages.home', ['products' => $products]);
     }
 
@@ -65,8 +61,7 @@ class ProductController extends Controller
         if ($image) {
             $destination_path = 'public/images/products';
             $image_name = $image->getClientOriginalName();
-            $path = $request->image->storeAs($destination_path,$image_name);
-            // $image->move('asset', $image->getClientOriginalName());
+            $path = $request->image->storeAs($destination_path, $image_name);
         }
 
         Product::create([

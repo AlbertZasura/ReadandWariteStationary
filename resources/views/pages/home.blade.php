@@ -3,15 +3,11 @@
 
 @section('content')
     <div class="container">
-        {{-- @if (Session::get('users'))
-            --}}
-            @can('isAdmin')
-                <a href="{{ url('/product/add') }}" class="btn btn-primary mb-1" role="button">Add New Stationary</a>
-                <a href="{{ url('/productType/add') }}" class="btn btn-primary mb-1" role="button">Add New Stationary Type</a>
-                <a href="{{ url('/productType/edit') }}" class="btn btn-primary mb-1" role="button">Edit Stationary Type</a>
-            @endcan
-            {{--
-        @endif --}}
+        @can('isAdmin')
+            <a href="{{ url('/product/add') }}" class="btn btn-primary mb-1" role="button">Add New Stationary</a>
+            <a href="{{ url('/productType/add') }}" class="btn btn-primary mb-1" role="button">Add New Stationary Type</a>
+            <a href="{{ url('/productType/edit') }}" class="btn btn-primary mb-1" role="button">Edit Stationary Type</a>
+        @endcan
 
         @if (is_null($products[0]))
             <p>There is no product match with the keyword</p>

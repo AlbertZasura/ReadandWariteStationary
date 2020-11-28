@@ -6,7 +6,6 @@ use App\DetailTransaction;
 use App\Product;
 use App\ProductType;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ProductTypeController extends Controller
@@ -18,15 +17,14 @@ class ProductTypeController extends Controller
      */
     public function index()
     {
-        $productTypes = DetailTransaction::select('products.type_id','product_types.name','product_types.image', DB::raw('sum(qty) as quantity'))
+        $productTypes = DetailTransaction::select('products.type_id', 'product_types.name', 'product_types.image', DB::raw('sum(qty) as quantity'))
             ->join('products', 'products.id', '=', 'detail_transactions.product_id')
             ->join('product_types', 'products.type_id', '=', 'product_types.id')
-            ->groupBy('type_id','product_types.name','product_types.image')
+            ->groupBy('type_id', 'product_types.name', 'product_types.image')
             ->orderBy('quantity', 'DESC')
             ->limit(4)
             ->get();
 
-        // dd($productTypes);
         return view('pages.welcome', ["productTypes" => $productTypes]);
     }
 
@@ -58,7 +56,7 @@ class ProductTypeController extends Controller
         if ($image) {
             $destination_path = 'public/images/productTypes';
             $image_name = $image->getClientOriginalName();
-            $path = $request->image->storeAs($destination_path,$image_name);
+            $path = $request->image->storeAs($destination_path, $image_name);
         }
 
         ProductType::create([

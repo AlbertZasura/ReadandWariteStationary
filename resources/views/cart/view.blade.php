@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title', 'Cart')
 @section('content')
     <div class="container">
         @if (count($carts) == 0)
@@ -14,7 +14,8 @@
                             <h5 class="card-title my-2">Stationary Name : {{ $cart->products->name }}</h5>
                             <p class="card-text">
                                 <li>Stationary Price : {{ $cart->products->price }}</li>
-                                <li>Quantity : {{ $cart->qty }}</li><hr>
+                                <li>Quantity : {{ $cart->qty }}</li>
+                                <hr>
                             <p class="my-2">Total : Rp.{{ $cart->products->price * $cart->qty }}</p>
                             <div class="float-right form-inline">
                                 <form action="/cart/{{ $cart->id }}/update" method="post">

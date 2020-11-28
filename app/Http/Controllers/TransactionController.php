@@ -19,7 +19,7 @@ class TransactionController extends Controller
             }
         }
 
-        if(count($transactions)==0){
+        if (count($transactions) == 0) {
             return view('pages.transaction', [
                 'transactions' => $transactions
             ]);

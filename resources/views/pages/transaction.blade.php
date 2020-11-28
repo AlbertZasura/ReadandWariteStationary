@@ -24,7 +24,7 @@
                                 <td>Rp{{ $transactions[$i]->detailTransactions[$j]->products->price }},00</td>
                                 <td>Quantity: {{ $transactions[$i]->detailTransactions[$j]->qty }}</td>
                                 <td>Sub Total:
-                                    Rp{{ (($transactions[$i]->detailTransactions[$j]->qty) * ($transactions[$i]->detailTransactions[$j]->products->price)) }}
+                                    Rp{{ $transactions[$i]->detailTransactions[$j]->qty * $transactions[$i]->detailTransactions[$j]->products->price }}
                                 </td>
                             </tr>
 

@@ -13,18 +13,18 @@ class ProductTypeSeeder extends Seeder
     public function run()
     {
         $productTypeNames = [
-            "pen","pencil","ruler",
-            "notebook","dictionary","smart pen",
+            "pen", "pencil", "ruler",
+            "notebook", "dictionary", "smart pen",
             "smart note"
         ];
 
         $productTypePhotos = [
-            "pen.jpg","pencil.jpg","ruler.jpg",
-            "book.jpg","dictionary.jpg","smartpen.jpg",
+            "pen.jpg", "pencil.jpg", "ruler.jpg",
+            "book.jpg", "dictionary.jpg", "smartpen.jpg",
             "smartNote.jpg"
         ];
 
-        for ($i=0; $i < 7; $i++) { 
+        for ($i = 0; $i < 7; $i++) {
             $productType = new ProductType;
             $productType->fill(["name" => $productTypeNames[$i], "image" => $productTypePhotos[$i]]);
             $productType->save();

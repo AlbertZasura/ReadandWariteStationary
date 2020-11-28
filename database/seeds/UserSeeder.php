@@ -13,20 +13,20 @@ class UserSeeder extends Seeder
     public function run()
     {
         $userNames = [
-            "admin","member"
+            "admin", "member"
         ];
 
         $userEmails = [
-            "admin@gmail.com","member@gmail.com"
+            "admin@gmail.com", "member@gmail.com"
         ];
 
         $userPasswords = [
-            "admin1","member1"
+            "admin1", "member1"
         ];
 
-        for ($i=0; $i < 2; $i++) { 
+        for ($i = 0; $i < 2; $i++) {
             $user = new User;
-            $user->fill(["name" => $userNames[$i],"role" => $userNames[$i], "email" => $userEmails[$i],"password" => bcrypt($userPasswords[$i])]);
+            $user->fill(["name" => $userNames[$i], "role" => $userNames[$i], "email" => $userEmails[$i], "password" => bcrypt($userPasswords[$i])]);
             $user->save();
         }
     }

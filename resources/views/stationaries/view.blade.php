@@ -6,7 +6,8 @@
         <div class="card mb-3">
             <div class="row no-gutters align-items-center">
                 <div class="col-md-4">
-                    <img src="{{ asset('/storage/images/products/'.$product->image) }}" class="card-img" alt="{{ $product->name }}">
+                    <img src="{{ asset('/storage/images/products/' . $product->image) }}" class="card-img"
+                        alt="{{ $product->name }}">
                 </div>
                 <div class="col-md-8 ">
                     <div class="card-body">
@@ -15,7 +16,7 @@
                             Stationary Stock: {{ $product->stock }}<br />
                             Stationary Type: {{ $product->productTypes->name }}<br />
                             Stationary Description: {{ $product->description }}</p>
-    
+
                         <div class="text-right float-right">
                             @can('isMember')
                                 <div class="form-inline my-2">
