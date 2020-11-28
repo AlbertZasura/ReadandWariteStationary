@@ -1,8 +1,8 @@
-@extends('layouts.master')
+@extends('layouts.app')
 
 @section('title', 'Transaction History')
 
-@section('container__content')
+@section('content')
     <div class="container">
         @if (count($transactions) == 0)
             <p>You don't have any Transaction</p>

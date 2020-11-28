@@ -10,9 +10,6 @@ class TransactionController extends Controller
 {
     public function index()
     {
-        if (Auth::check() == false) {
-            return redirect()->home();
-        }
         $user = Auth::user();
         $transactions = Transaction::where("user_id", $user->id)->get();
         for ($i = 0; $i < count($transactions); $i++) {

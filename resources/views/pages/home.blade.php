@@ -1,18 +1,18 @@
-@extends('layouts.master')
-
+@extends('layouts.app')
 @section('title', 'home')
 
-@section('container__content')
-
-    @if (Session::get('users'))
-        @if (Session::get('users')->role == 'admin')
-            <a href="{{ url('/product/add') }}" class="btn btn-primary mb-1" role="button">Add New Stationary</a>
-            <a href="{{ url('/productType/add') }}" class="btn btn-primary mb-1" role="button">Add New Stationary Type</a>
-            <a href="{{ url('/productType/edit') }}" class="btn btn-primary mb-1" role="button">Edit Stationary Type</a>
-        @endif
-    @endif
-
+@section('content')
     <div class="container">
+        {{-- @if (Session::get('users'))
+            --}}
+            @can('isAdmin')
+                <a href="{{ url('/product/add') }}" class="btn btn-primary mb-1" role="button">Add New Stationary</a>
+                <a href="{{ url('/productType/add') }}" class="btn btn-primary mb-1" role="button">Add New Stationary Type</a>
+                <a href="{{ url('/productType/edit') }}" class="btn btn-primary mb-1" role="button">Edit Stationary Type</a>
+            @endcan
+            {{--
+        @endif --}}
+
         @if (is_null($products[0]))
             <p>There is no product match with the keyword</p>
         @else
@@ -21,7 +21,8 @@
                     @if (count($products) > $i)
                         <div class="card col-sm-4 p-0">
                             <a href="/product/{{ $products[$i]->id }}"><img class="card-img-top"
-                                    src="{{ asset('/storage/images/products/'.$products[$i]->image) }}" alt="{{ $products[$i]->name }}"></a>
+                                    src="{{ asset('/storage/images/products/' . $products[$i]->image) }}"
+                                    alt="{{ $products[$i]->name }}"></a>
                             <div class="card-body">
                                 <h5 class="card-title text-primary">{{ $products[$i]->name }}</h5>
                                 <p class="card-text">{{ $products[$i]->description }}</p>
@@ -36,7 +37,8 @@
                     @if (count($products) > $i)
                         <div class="card col-sm-4 p-0">
                             <a href="/product/{{ $products[$i]->id }}"><img class="card-img-top"
-                                    src="{{ asset('/storage/images/products/'.$products[$i]->image) }}" alt="{{ $products[$i]->name }}"></a>
+                                    src="{{ asset('/storage/images/products/' . $products[$i]->image) }}"
+                                    alt="{{ $products[$i]->name }}"></a>
                             <div class="card-body">
                                 <h5 class="card-title text-primary">{{ $products[$i]->name }}</h5>
                                 <p class="card-text">{{ $products[$i]->description }}</p>

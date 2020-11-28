@@ -17,10 +17,8 @@ class CartController extends Controller
     }
 
     public function show() {
-        if (Auth::check() == false) {
-            return redirect()->home();
-        }
-        $carts = Cart::all()->where('user_id',Session::get('users')->id);
+        $user = Auth::user();
+        $carts = Cart::all()->where('user_id',$user->id);
         return view('cart.view', ['carts' => $carts]);
     }
 
@@ -28,18 +26,18 @@ class CartController extends Controller
         $this->validate(request(), [
             'qty' => 'required|min:1'
         ]);
-
+        $user = Auth::user();
         $products = Product::find($productId);
         if($products->stock < $request->qty || $request->qty <= 0) return back()->with('error', 'Invalid Stock');
         else {
-            $carts = Cart::where('user_id', Session::get('users')->id)->where('product_id', $products->id)->first();
+            $carts = Cart::where('user_id', $user->id)->where('product_id', $products->id)->first();
             if($carts) {
                 $carts->qty = $carts->qty + $request->qty;
                 $carts->save();
             }
             else {
                 $carts = Cart::create([
-                    'user_id' => Session::get('users')->id,
+                    'user_id' => $user->id,
                     'product_id' => $productId,
                     'qty' => $request->qty 
                 ]);
@@ -54,9 +52,6 @@ class CartController extends Controller
     }
 
     public function update($id) {
-        if (Auth::check() == false) {
-            return redirect()->home();
-        }
         $carts = Cart::find($id);
         return view('cart.update', ['carts' => $carts]);
     }
@@ -82,11 +77,11 @@ class CartController extends Controller
 
     public function checkOut() {
         $transaction = Transaction::create([
-            'user_id' => Session::get('users')->id,
+            'user_id' => Auth::user()->id,
             'date' => now()
         ]);
         
-        $carts = Cart::all()->where('user_id', Session::get('users')->id,);
+        $carts = Cart::all()->where('user_id', Auth::user()->id);
         foreach($carts as $cart) {
             $products = Product::find($cart->product_id);
             // decrease stock product with cart qty

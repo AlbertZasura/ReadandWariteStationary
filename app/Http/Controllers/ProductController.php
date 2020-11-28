@@ -15,14 +15,20 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
+
     public function index(Request $request)
     {
         $search = $request->get('search');
-        if(is_numeric($search)){
-            $products = Product::where("type_id", $search)->paginate(6);
-        }else{
-            $products = Product::where("name", 'like', '%' . $search . '%')->paginate(6);
-        }
+        // if(is_numeric($search)){
+        //     $products = Product::where()->paginate(6);
+        // }else{
+            $products = Product::where("name", 'like', '%' . $search . '%')->orWhere("type_id", $search)->paginate(6);
+        // }
         return view('pages.home', ['products' => $products]);
     }
 
@@ -33,11 +39,6 @@ class ProductController extends Controller
      */
     public function create()
     {
-        if (Auth::check() == false) return redirect('/home');
-        $user = Auth::user();
-        if ($user->role == 'member') {
-            return redirect('/home');
-        }
         $productTypes = ProductType::all();
         $products = Product::get();
         return view('stationaries.add', ['products' => $products, 'productTypes' => $productTypes]);
@@ -104,11 +105,6 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        if (Auth::check() == false) return redirect('/home');
-        $user = Auth::user();
-        if ($user->role == 'member') {
-            return redirect('/home');
-        }
         $product = Product::find($id);
         return view('stationaries.update', ['product' => $product]);
     }
@@ -135,7 +131,7 @@ class ProductController extends Controller
         $product->description = $request->description;
         $product->save();
 
-        return redirect("/product/" . $id . "/edit");
+        return redirect("/product/" . $id);
     }
 
     /**
