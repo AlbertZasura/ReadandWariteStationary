@@ -40,5 +40,6 @@
                 <button class="btn btn-danger my-2">Check Out</button>
             </form>
         @endif
+        @include('layouts.errors')
     </div>
 @endsection

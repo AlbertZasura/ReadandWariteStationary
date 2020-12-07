@@ -12,16 +12,23 @@ use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
-    public function create() {
-        
-    }
-
+    /**
+     * function show berfungsi untuk mengambil dan menampilkan 
+     * barang-barang yang telah dimasukan kedalam keranjang
+     * setiap user.
+     */
     public function show() {
         $user = Auth::user();
         $carts = Cart::all()->where('user_id',$user->id);
         return view('cart.view', ['carts' => $carts]);
     }
 
+    /**
+     * function add berfungsi untuk mengambil dan menyimpan barang
+     * kedalam keranjang (cart) user dilengkapi dengan berbagai
+     * validasi seperti perhitungan jumlah stock namun tidak mempengaruhi
+     * nilai stock aslinya selama tidak di check out.
+     */
     public function add(Request $request, $productId) {
         $this->validate(request(), [
             'qty' => 'required|min:1'
@@ -46,16 +53,29 @@ class CartController extends Controller
         }
     }
 
+    /**
+     * function destroy berfungsi untuk menghapus salah satu barang
+     * dalam keranjang user apabila user tidak jadi mengambil barang 
+     * tersebut
+     */
     public function destroy($carts) {
         Cart::destroy($carts);
         return redirect('/cart');
     }
-
+    /**
+     * function update berfungsi untuk menampilkan halaman update saat
+     * user ingin mengupdate qty barang dari cart user
+     */
     public function update($id) {
         $carts = Cart::find($id);
         return view('cart.update', ['carts' => $carts]);
     }
 
+    /**
+     * function fetch berfungsi untuk melakukan proses update pada barang
+     * yang ada dalam cart user. proses ini mirip seperti function add namun
+     * yang berbeda adalah penambahan atau pengurangan qty
+     */
     public function fecth(Request $request, $id) {
         $carts = Cart::find($id);
         $products = Product::find($carts->product_id);
@@ -74,7 +94,11 @@ class CartController extends Controller
         $carts->save();
         return view('cart.update', ['carts' => $carts]);
     }
-
+    
+    /**
+     * function checkOut berfungsi untuk mengangkut semua barang
+     * yang ada pada keranjang (cart) user kedalam suatu transaksi.
+     */
     public function checkOut() {
         $transaction = Transaction::create([
             'user_id' => Auth::user()->id,
@@ -85,6 +109,8 @@ class CartController extends Controller
         foreach($carts as $cart) {
             $products = Product::find($cart->product_id);
             // decrease stock product with cart qty
+            // check again to make sure
+            if($products->stock < $cart->qty || $cart->qty <= 0) return back()->with('error', 'There\'s something error with the stock stationary');
             $products->stock = $products->stock - $cart->qty;
             $products->save();
 
