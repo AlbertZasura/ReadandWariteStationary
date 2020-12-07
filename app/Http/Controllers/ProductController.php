@@ -9,11 +9,12 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    function index berfungsi untuk menampilkan produk pada homepage,
+    function index akan mengecek apakah terdapat request search atau kategori.
+    apabila ada maka akan menampilkan product sesuai request / kategori yang diminta.
+    product hanya ditampilkan sebanyak 6 dalam 1 halaman.
+    */
 
     public function index(Request $request)
     {
@@ -28,24 +29,23 @@ class ProductController extends Controller
         return view('pages.home', ['products' => $products]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    function create hanya menampilkan halaman untuk menambah product,
+    karena halaman add product membutuhkan semua tipe product maka kita perlu mengambil semua
+    data tipe product dari Database
+    */
     public function create()
     {
         $productTypes = ProductType::all();
-        $products = Product::get();
-        return view('stationaries.add', ['products' => $products, 'productTypes' => $productTypes]);
+        return view('stationaries.add', ['productTypes' => $productTypes]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    function store berfungsi untuk menambahkan data ke Database.
+    sebelum menyentuh database function store melakukan validasi terhadap request dan apabila sesuai maka
+    data request ditambahkan ke DB dan return success message.
+    fungsi store juga membuat image yang diupload user tersimpan di server storage
+    */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -76,12 +76,11 @@ class ProductController extends Controller
         return redirect('/product/add')->with(['success' => 'Add Product Successfully']);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    function show berfungsi untuk menampilkan detail suatu produk.
+    sebelum menampilkan function show akan melakukan validasi apakah user sudah login atau belum apabila belum
+    maka akan di redirect ke login page.
+    */
     public function show($id)
     {
         if (Auth::check() == false) {
@@ -92,25 +91,21 @@ class ProductController extends Controller
         return view('stationaries.view', ['product' => $product]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    function edit hanya menampilkan halaman untuk update product,
+    function edit akan menerima parameter id untuk mencari suatu product berdasarkan id yang di request
+    */
     public function edit($id)
     {
         $product = Product::find($id);
         return view('stationaries.update', ['product' => $product]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    function update hampir sama dengan function store bedanya update berfungsi untuk mengubah data di Database.
+    sebelum menyentuh database function update melakukan validasi terhadap request dan apabila sesuai maka
+    data dalam DB di ubah dan redirect ke halaman detail product
+    */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
@@ -129,11 +124,9 @@ class ProductController extends Controller
         return redirect("/product/" . $id);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
+    /*
+    function destroy berfungsi untuk mendelete suatu data dalam DB.
+    function destroy membutuh parameter id untuk mengetahui data product mana yang ingin dihapus user.
      */
     public function destroy($id)
     {

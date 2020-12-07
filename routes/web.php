@@ -6,15 +6,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'ProductTypeController@index');
 Auth::routes();
-// Route::get('/login' , 'SessionController@create');
-// Route::post('/login/auth', 'SessionController@checkLogin');
-// Route::get('/logout' , 'SessionController@destroy');
-
-// Route::get('/register', 'RegisterController@create');
-// Route::post('/register', 'RegisterController@store');
 
 Route::get('/home', 'ProductController@index')->name('home');
 
+//fungsi middleware adalah untuk memberikan izin akses dimana product/add hanya boleh di akses oleh admin
 Route::get('/product/add', 'ProductController@create')->middleware('isAdmin');
 Route::post('/product/add', 'ProductController@store')->middleware('isAdmin');
 Route::get('/product/{product}', 'ProductController@show');
@@ -37,14 +32,3 @@ Route::delete('/cart/{carts}/delete', 'CartController@destroy')->middleware('isM
 Route::post('/cart/checkout', 'CartController@checkOut')->middleware('isMember');
 Route::post('/cart/add/{productId}', 'CartController@add')->middleware('isMember');
 Route::patch('/cart/update/{carts}', 'CartController@fecth')->middleware('isMember');
-
-
-//Testing Cookie
-// Route::get('/cookie/set', 'CookieController@setCookie');
-// Route::get('/cookie/get', 'CookieController@getCookie');
-
-
-
-// Auth::routes();
-
-// Route::get('/home', 'HomeController@index')->name('home');

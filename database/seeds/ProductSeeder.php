@@ -6,9 +6,7 @@ use App\Product;
 class ProductSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
-     *
-     * @return void
+     * method dibawah merupakan seeding dimana kita membuat template insert data ke DB
      */
     public function run()
     {

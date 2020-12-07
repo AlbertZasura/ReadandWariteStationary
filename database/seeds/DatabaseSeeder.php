@@ -5,9 +5,8 @@ use Illuminate\Database\Seeder;
 class DatabaseSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
-     *
-     * @return void
+     * method dibawah merupakan method yang pertama di panggil saat kita memanggil php artisan db:seed 
+     * sehingga kita perlu menulis class seeding mana yang pertama dipanggil dan seterusnya.
      */
     public function run()
     {

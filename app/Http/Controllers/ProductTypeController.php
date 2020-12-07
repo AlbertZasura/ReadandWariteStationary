@@ -10,11 +10,12 @@ use Illuminate\Support\Facades\DB;
 
 class ProductTypeController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    function index berfungsi untuk menampilkan 4 tipe produk yang paling laris di halaman welcome,
+    sehingga kita perlu membuat query dengan menjoin tabel detail_transactions, products, dan product_types.
+    dari detail transactions kita dapat mengetahui produk apa yang paling banyak di beli, dari produk kita dapat mengetahui
+    produk itu merupakan tipe produk apa.
+    */
     public function index()
     {
         $productTypes = DetailTransaction::select('products.type_id', 'product_types.name', 'product_types.image', DB::raw('sum(qty) as quantity'))
@@ -28,23 +29,23 @@ class ProductTypeController extends Controller
         return view('pages.welcome', ["productTypes" => $productTypes]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    function create hanya menampilkan halaman untuk menambah tipe product,
+    karena halaman add product type juga memperlihatkan semua tipe product yang sudah ada maka kita perlu
+    mengambil semua tipe product data dari Database
+    */
     public function create()
     {
         $productTypes = ProductType::get();
         return view('stationaryTypes.add', ['productTypes' => $productTypes]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    function store berfungsi untuk menambahkan data ke Database.
+    sebelum menyentuh database function store melakukan validasi terhadap request dan apabila sesuai maka
+    data request ditambahkan ke DB dan return success message.
+    fungsi store juga membuat image yang diupload user tersimpan di server storage
+    */
     public function store(Request $request)
     {
         $this->validate($request, [
@@ -78,25 +79,21 @@ class ProductTypeController extends Controller
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    function edit hanya menampilkan halaman untuk update atau delete tipe product,
+    function edit akan menerima parameter id untuk mencari suatu tipe product berdasarkan id yang di request
+    */
     public function edit()
     {
         $productTypes = ProductType::get();
         return view('stationaryTypes.update', ['productTypes' => $productTypes]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
-     */
+    /*
+    function update hampir sama dengan function store bedanya update berfungsi untuk mengubah data di Database.
+    sebelum menyentuh database function update melakukan validasi terhadap request dan apabila sesuai maka
+    data dalam DB di ubah dan redirect ke halaman edit tipe product
+    */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
@@ -108,11 +105,9 @@ class ProductTypeController extends Controller
         return redirect('/productType/edit');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Product  $product
-     * @return \Illuminate\Http\Response
+    /*
+    function destroy berfungsi untuk mendelete suatu data dalam DB.
+    function destroy membutuh parameter id untuk mengetahui data tipe product mana yang ingin dihapus user.
      */
     public function destroy($id)
     {

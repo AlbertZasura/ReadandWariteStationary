@@ -8,6 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class TransactionController extends Controller
 {
+     /*
+    function index berfungsi untuk menampilkan transaction user,
+    function index akan menghitung jumlah transaksi user apabila user tidak mempunyai transaksi maka
+    yang direturn hanyalah null sebaliknya akan di return total price
+    */
     public function index()
     {
         $user = Auth::user();

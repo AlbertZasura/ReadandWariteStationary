@@ -6,10 +6,8 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateProductsTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
+     /**
+     * method dibawah berfungsi untuk membuat table dalam database
      */
     public function up()
     {
