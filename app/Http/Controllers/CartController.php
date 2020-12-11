@@ -81,7 +81,7 @@ class CartController extends Controller
         $products = Product::find($carts->product_id);
         
         $this->validate($request, [
-            'qty' => 'required|min:0|max:'.$products->stock
+            'qty' => 'required|integer'
         ]);
         
         if($request->qty <= 0 || $products->stock < $request->qty) {
@@ -93,7 +93,7 @@ class CartController extends Controller
 
         $carts->qty = $request->qty;
         $carts->save();
-        return view('cart.update', ['carts' => $carts]);
+        return redirect('/cart/'.$carts->id.'/update');
     }
     
     /**
