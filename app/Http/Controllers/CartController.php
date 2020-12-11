@@ -88,8 +88,9 @@ class CartController extends Controller
             $errorMessage = null;
             if($request->qty <= 0) $errorMessage = 'Input At least bigger than 0';
             else $errorMessage = 'The Quantity must lower than '.$products->stock; 
-            return back()->with('carts', $carts)->with('error', $errorMessage);
+            return back()->with('error', $errorMessage);
         }
+
         $carts->qty = $request->qty;
         $carts->save();
         return view('cart.update', ['carts' => $carts]);
