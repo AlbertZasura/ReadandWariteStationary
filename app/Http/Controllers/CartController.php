@@ -40,6 +40,7 @@ class CartController extends Controller
             $carts = Cart::where('user_id', $user->id)->where('product_id', $products->id)->first();
             if($carts) {
                 $carts->qty = $carts->qty + $request->qty;
+                if($products->stock < $carts->qty) return back()->with('error', 'Invalid Stock');
                 $carts->save();
             }
             else {
@@ -88,12 +89,13 @@ class CartController extends Controller
             $errorMessage = null;
             if($request->qty <= 0) $errorMessage = 'Input At least bigger than 0';
             else $errorMessage = 'The Quantity must lower than '.$products->stock; 
-            return back()->with('error', $errorMessage);
+            return back()->with('carts', $carts)->with('error', $errorMessage);
         }
-
         $carts->qty = $request->qty;
         $carts->save();
         return redirect('/cart/'.$carts->id.'/update');
+
+
     }
     
     /**

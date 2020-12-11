@@ -6,6 +6,7 @@ use App\Product;
 use App\ProductType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -59,9 +60,10 @@ class ProductController extends Controller
 
         $image = $request->image;
         if ($image) {
-            $destination_path = 'public/images/products';
+            // $destination_path = 'public/images/products';
             $image_name = $image->getClientOriginalName();
-            $path = $request->image->storeAs($destination_path, $image_name);
+            // $path = $request->image->storeAs($destination_path, $image_name);
+            str_replace('public','/storage', Storage::putFileAs('/public/images/products',$request->image,$image_name));
         }
 
         Product::create([
