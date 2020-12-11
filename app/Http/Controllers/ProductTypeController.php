@@ -7,6 +7,7 @@ use App\Product;
 use App\ProductType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class ProductTypeController extends Controller
 {
@@ -55,9 +56,10 @@ class ProductTypeController extends Controller
 
         $image = $request->image;
         if ($image) {
-            $destination_path = 'public/images/productTypes';
+            // $destination_path = 'public/images/productTypes';
             $image_name = $image->getClientOriginalName();
-            $path = $request->image->storeAs($destination_path, $image_name);
+            // $path = $request->image->storeAs($destination_path, $image_name);
+            str_replace('public','/storage', Storage::putFileAs('/public/images/productTypes',$request->image,$image_name));
         }
 
         ProductType::create([
