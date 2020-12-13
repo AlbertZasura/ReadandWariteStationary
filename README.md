@@ -14,5 +14,5 @@ Before run this program, do below instructions:
 # This Project is a College Project.
 
 # Author Lists:
-1. @albertzasura
+1. Albert Zasura
 2. Popo Fianto
