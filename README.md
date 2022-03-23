@@ -1,18 +1,22 @@
 # ReadandWAriteStationary
 
 ReadandWAriteStationary is a ***Web Programming*** Project.
-This Project focus on MVC and use Framework Laravel to build the website.
+This Project focus on MVC and use Laravel Framework to build the website.
 
-# Introduction
+## Introduction
 
 Before run this program, do below instructions:
-1.	Change DB_DATABASE to your database name in .env file  (DEFAULT: ReadandWariteStationary)
-2.	php artisan storage:link
-3.	php artisan migrate:refresh –seed
-4.	php artisan serve
+First, Change `DB_DATABASE` to your database name in `.env` file  (DEFAULT: ReadandWariteStationary)
 
-# This Project is a College Project.
+Then, types:
+```
+php artisan storage:link
+php artisan migrate:refresh –seed
+php artisan serve
+```
 
-# Author Lists:
+## This Project is a College Project.
+
+## Author Lists:
 1. Albert Zasura
 2. Popo Fianto
